@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101614">
+  <meta name="description" content="Trance 厂牌图谱：按成立年份梳理厂牌与子厂牌的关系。">
+  <title>Trance 厂牌图谱</title>
+  <style>
+    :root{--bg:#101614;--panel:#171f1c;--panel-2:#1d2823;--line:#2b3932;--text:#e8efe9;--muted:#91a097;--lime:#c6fa65;--mint:#76e0bc;--amber:#f5c878;--red:#ee8d80;--blue:#91baff;--shadow:0 24px 70px #0006;--sans:Inter,"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;--mono:"SFMono-Regular",Consolas,monospace}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 75% -10%,#314336 0,transparent 38%),var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.55}button,input,select,textarea{font:inherit}button{cursor:pointer;color:inherit}.shell{max-width:1440px;margin:auto;padding:24px 38px 64px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:2px 0 22px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:36px;height:36px;border:1px solid #58714c;border-radius:11px;display:grid;place-items:center;color:var(--lime);font-weight:800;background:linear-gradient(140deg,#c6fa6520,#76e0bc08);letter-spacing:-2px}.brand-name{font-weight:730;letter-spacing:.02em}.brand-sub{font-size:11px;color:var(--muted);letter-spacing:.13em;text-transform:uppercase}.top-actions{display:flex;gap:9px;align-items:center}.quiet-btn,.outline-btn,.primary-btn{border:1px solid var(--line);background:transparent;border-radius:9px;padding:9px 13px;color:var(--text);transition:.15s}.quiet-btn:hover,.outline-btn:hover{background:#ffffff0a;border-color:#53655a}.primary-btn{background:var(--lime);border-color:var(--lime);color:#162013;font-weight:700}.primary-btn:hover{background:#d6ff92;transform:translateY(-1px)}.quiet-btn{color:var(--muted)}.hero{display:flex;justify-content:space-between;align-items:end;gap:26px;padding:38px 0 28px}.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--mint);font-weight:700;text-transform:uppercase}.hero h1{font-size:clamp(32px,4vw,48px);letter-spacing:-.055em;line-height:1.08;margin:9px 0 13px;font-weight:650}.hero p{color:#a8b5ac;margin:0;max-width:620px}.hero-note{border:1px solid #3e5146;background:#18221d;border-radius:12px;padding:12px 16px;color:var(--muted);font-size:12px;max-width:280px}.hero-note strong{color:var(--lime);display:block;font-size:13px;margin-bottom:3px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}.stat{border:1px solid var(--line);background:#151d19c9;border-radius:12px;padding:14px 16px}.stat-label{font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}.stat-value{font-size:24px;letter-spacing:-.04em;margin-top:4px;font-weight:680}.stat-value small{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:0;margin-left:5px}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:start}.board,.detail{border:1px solid var(--line);border-radius:14px;background:#151d19e8;box-shadow:var(--shadow)}.board-head{padding:17px 18px 13px;border-bottom:1px solid var(--line)}.board-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}.board-title h2{font-size:16px;margin:0;font-weight:650}.board-title span{font-size:11px;color:var(--muted)}.filters{display:grid;grid-template-columns:minmax(180px,1fr) 160px 150px auto;gap:9px}.field-control{min-width:0;position:relative}.field-control input,.field-control select{width:100%;height:37px;padding:0 11px;background:#101714;border:1px solid #334138;border-radius:8px;color:var(--text);outline:none}.field-control input:focus,.field-control select:focus,textarea:focus{border-color:var(--mint);box-shadow:0 0 0 3px #76e0bc14}.field-control input::placeholder{color:#77867d}.tree-tools{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;color:var(--muted);font-size:11px;border-bottom:1px solid #29352e}.link-btn{background:none;border:0;color:var(--mint);padding:3px 5px;font-size:11px}.tree{padding:7px 13px 16px;max-height:calc(100vh - 370px);min-height:420px;overflow:auto;scrollbar-color:#425248 transparent;scrollbar-width:thin}.tree-row{--depth:0;display:flex;align-items:center;gap:7px;min-height:39px;padding:4px 9px 4px calc(8px + var(--depth)*22px);border-radius:8px;border:1px solid transparent;transition:.12s;position:relative}.tree-row:hover{background:#ffffff07}.tree-row.selected{background:#c6fa6510;border-color:#c6fa6538}.tree-row.filtered-out{display:none}.tree-row.child::before{content:"";position:absolute;left:calc(17px + (var(--depth) - 1)*22px);top:-12px;height:31px;border-left:1px solid #34443a}.tree-row.child::after{content:"";position:absolute;left:calc(17px + (var(--depth) - 1)*22px);top:19px;width:14px;border-top:1px solid #34443a}.twisty{width:18px;height:18px;border:0;background:transparent;color:#8f9e94;display:grid;place-items:center;padding:0;font-size:10px;flex:none}.twisty.empty{visibility:hidden}.year{font:11px var(--mono);color:var(--mint);min-width:39px}.row-name{font-weight:580;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}.row-meta{color:#718177;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.genre-pill,.status-pill,.type-pill{font-size:10px;border-radius:20px;padding:3px 7px;white-space:nowrap;border:1px solid #3b4a40;color:#b9c5bc}.genre-pill{color:#bfdba9;background:#243023}.status-pill.active{color:#99e5bc;background:#1d3329;border-color:#315842}.status-pill.inactive{color:#f0a89b;background:#352421;border-color:#604038}.status-pill.unknown{color:#c4b8e8;background:#2b2639;border-color:#484060}.row-tail{display:flex;gap:5px;align-items:center;margin-left:auto;min-width:0}.row-tail .genre-pill{max-width:102px;overflow:hidden;text-overflow:ellipsis}.count-pill{font:10px var(--mono);color:#75847a;border:1px solid #344138;padding:2px 6px;border-radius:12px}.detail{position:sticky;top:14px;overflow:hidden}.detail-top{padding:20px 20px 16px;background:radial-gradient(ellipse at 100% 0,#c6fa6512,transparent 60%),#19231e;border-bottom:1px solid var(--line)}.detail-kicker{font:10px var(--mono);color:var(--mint);letter-spacing:.12em}.detail h2{font-size:21px;letter-spacing:-.035em;margin:7px 0 5px;line-height:1.25}.detail-sub{color:var(--muted);font-size:12px}.detail-body{padding:16px 20px}.detail-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px 11px}.detail-field label{display:block;color:#718177;font-size:10px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:4px}.detail-field div{color:#d7e1d8;overflow-wrap:anywhere}.detail-section{margin-top:17px;padding-top:14px;border-top:1px solid var(--line)}.detail-section h3{font-size:11px;color:#8d9b91;text-transform:uppercase;letter-spacing:.12em;margin:0 0 8px}.detail-section p{color:#c4cec5;margin:0;font-size:12px}.detail-actions{display:flex;gap:8px;padding:0 20px 18px}.detail-actions button{flex:1;font-size:11px;padding:8px}.empty-state{padding:36px;color:var(--muted);text-align:center}.source-foot{font-size:10px;color:#738077;margin:15px 2px}.modal-backdrop{position:fixed;inset:0;background:#050907c9;backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal-backdrop.open{display:flex}.modal{width:min(680px,100%);max-height:min(92vh,850px);overflow:auto;background:#19221e;border:1px solid #3a4b40;border-radius:16px;box-shadow:0 30px 100px #000b}.modal-head{display:flex;align-items:start;justify-content:space-between;padding:20px 23px 15px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0 0 3px;font-size:19px}.modal-head p{margin:0;color:var(--muted);font-size:12px}.close-btn{border:0;background:transparent;color:var(--muted);font-size:20px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;padding:18px 23px}.form-item.full{grid-column:1/-1}.form-item label{display:block;font-size:11px;color:#9ba99f;margin-bottom:5px}.form-item input,.form-item select,.form-item textarea{width:100%;border:1px solid #35453b;background:#101714;color:var(--text);border-radius:8px;padding:9px 10px;outline:none}.form-item textarea{min-height:72px;resize:vertical}.form-help{font-size:10px;color:#6f7d73;margin-top:4px}.form-footer{display:flex;justify-content:space-between;align-items:center;padding:0 23px 20px}.form-error{font-size:11px;color:var(--red)}.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#e7ffbd;color:#172117;border-radius:9px;padding:10px 15px;box-shadow:var(--shadow);transition:.2s;font-weight:600;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}.mobile-detail{display:none}
+    @media(max-width:980px){.shell{padding:20px 22px 46px}.workspace{grid-template-columns:minmax(0,1fr) 290px}.filters{grid-template-columns:minmax(150px,1fr) 135px 135px auto}.row-meta{display:none}.tree-row{gap:6px}}
+    @media(max-width:760px){.shell{padding:14px 14px 36px}.topbar{padding-bottom:14px}.brand-sub{display:none}.top-actions .quiet-btn{display:none}.hero{padding:27px 0 20px;align-items:start}.hero-note{display:none}.hero h1{font-size:34px}.stats{grid-template-columns:repeat(2,1fr);gap:8px}.stat{padding:11px 13px}.stat-value{font-size:21px}.workspace{display:block}.filters{grid-template-columns:1fr 1fr}.filters .search{grid-column:1/-1}.tree{max-height:unset;min-height:300px;padding:7px}.tree-row{padding-left:calc(5px + var(--depth)*16px);gap:5px}.tree-row.child::before{left:calc(12px + (var(--depth) - 1)*16px)}.tree-row.child::after{left:calc(12px + (var(--depth) - 1)*16px);width:10px}.year{min-width:34px;font-size:10px}.row-name{font-size:12px}.row-tail .genre-pill{display:none}.detail{position:fixed;z-index:8;left:0;right:0;bottom:0;top:auto;max-height:82vh;border-radius:18px 18px 0 0;transform:translateY(110%);transition:transform .24s ease;overflow:auto}.detail.mobile-open{transform:translateY(0)}.detail-top{padding-top:23px}.mobile-detail{display:block;position:fixed;inset:0;background:#050907a8;z-index:7;opacity:0;pointer-events:none;transition:opacity .2s}.mobile-detail.show{opacity:1;pointer-events:auto}.detail-actions{position:sticky;bottom:0;background:#151d19;padding-top:12px;border-top:1px solid var(--line)}.source-foot{font-size:9px}.form-grid{grid-template-columns:1fr;padding:16px 18px}.form-item.full{grid-column:auto}.modal-head{padding:17px 18px}.form-footer{padding:0 18px 18px}}
+    @media(max-width:390px){.top-actions{gap:5px}.top-actions .outline-btn{padding:8px 9px;font-size:11px}.top-actions .primary-btn{padding:8px 10px;font-size:11px}.tree-row{gap:3px}.row-tail{gap:3px}.status-pill{font-size:9px;padding:2px 5px}.year{min-width:31px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">TL</div><div><div class="brand-name">Trance Label Atlas</div><div class="brand-sub">独立厂牌图谱 · 初稿</div></div></div>
+      <div class="top-actions"><button class="quiet-btn" id="exportBtn" type="button">导出数据</button><button class="outline-btn" id="importBtn" type="button">导入 JSON</button><button class="primary-btn" id="addBtn" type="button">＋ 登记厂牌</button><input id="importFile" type="file" accept=".json,application/json" hidden></div>
+    </header>
+    <section class="hero"><div><div class="eyebrow">A living index of trance labels</div><h1>Trance 厂牌图谱</h1><p>按成立年份与厂牌隶属关系整理 Trance 厂牌，并保留参考截图中的跨风格标记和待核实信息。</p></div><div class="hero-note"><strong>数据标注 · 截图补录</strong>已录入截图中的厂牌与子厂牌；划线、问号和原风格标签均保留为备注。年份、风格及厂牌关系按截图初录，后续可逐条校订。</div></section>
+    <section class="stats" aria-label="目录统计"><div class="stat"><div class="stat-label">目录厂牌</div><div class="stat-value" id="statLabels">—</div></div><div class="stat"><div class="stat-label">关系层级</div><div class="stat-value" id="statDepth">— <small>层</small></div></div><div class="stat"><div class="stat-label">最早记录</div><div class="stat-value" id="statOldest">—</div></div><div class="stat"><div class="stat-label">仍在运营</div><div class="stat-value" id="statActive">—</div></div></section>
+    <main class="workspace">
+      <section class="board" aria-label="厂牌树状目录">
+        <div class="board-head"><div class="board-title"><h2>厂牌目录 <span style="color:var(--muted);font-weight:400">/ LABEL TREE</span></h2><span id="resultCount">— 条记录</span></div>
+          <div class="filters"><div class="field-control search"><input id="search" type="search" placeholder="搜索厂牌、创办人、风格…" aria-label="搜索"></div><div class="field-control"><select id="genreFilter" aria-label="按风格筛选"><option value="">全部风格</option></select></div><div class="field-control"><select id="statusFilter" aria-label="按状态筛选"><option value="">全部状态</option><option value="active">运营中</option><option value="inactive">已停止运营</option><option value="unknown">待确认</option></select></div><button class="quiet-btn" id="clearFilters" type="button" title="清除筛选">清除</button></div>
+        </div>
+        <div class="tree-tools"><span>按成立年份排序 · 点击厂牌查看档案</span><span><button class="link-btn" id="collapseAll" type="button">全部折叠</button> / <button class="link-btn" id="expandAll" type="button">全部展开</button></span></div>
+        <div class="tree" id="tree" role="tree"></div>
+      </section>
+      <aside class="detail" id="detail" aria-live="polite"></aside>
+    </main>
+    <div class="mobile-detail" id="mobileShade"></div>
+    <p class="source-foot">目录包含参考截图、2022–2026 年新设厂牌清单与前期整理条目；档案附 Discogs 检索入口。原清单未附部分来源网址，相关年份、运营状态与隶属关系仍可逐项核验。目录保存在当前浏览器，可随时导出备份。</p>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+    <form class="modal" id="labelForm"><div class="modal-head"><div><h2 id="formTitle">登记新厂牌</h2><p>按照“厂牌 → 子厂牌”的关系添加记录，之后仍可修改。</p></div><button class="close-btn" type="button" id="closeModal" aria-label="关闭">×</button></div>
+      <div class="form-grid">
+        <div class="form-item"><label for="name">厂牌名称 *</label><input id="name" name="name" required maxlength="100" placeholder="例如：A State of Trance"></div>
+        <div class="form-item"><label for="year">成立年份</label><input id="year" name="year" type="number" min="1900" max="2099" placeholder="例如：2001"></div>
+        <div class="form-item"><label for="parent">上级厂牌</label><select id="parent" name="parent"><option value="">顶层厂牌</option></select><div class="form-help">留空表示独立顶层厂牌。</div></div>
+        <div class="form-item"><label for="status">运营状态</label><select id="status" name="status"><option value="unknown">待确认</option><option value="active">运营中</option><option value="inactive">已停止运营</option></select></div>
+        <div class="form-item"><label for="founders">创办人 / 关键人员</label><input id="founders" name="founders" maxlength="180" placeholder="多个姓名以逗号分隔"></div>
+        <div class="form-item"><label for="genres">音乐风格</label><input id="genres" name="genres" maxlength="120" placeholder="Uplifting, Progressive"></div>
+        <div class="form-item"><label for="entity">公司 / 法律实体</label><input id="entity" name="entity" maxlength="120" placeholder="如有，请填写"></div>
+        <div class="form-item"><label for="country">国家 / 地区</label><input id="country" name="country" maxlength="80" placeholder="例如：荷兰"></div>
+        <div class="form-item full"><label for="notes">沿革与备注</label><textarea id="notes" name="notes" maxlength="1000" placeholder="改名、重启、母公司关系、发行特点等"></textarea></div>
+        <div class="form-item full"><label for="source">参考来源链接</label><input id="source" name="source" type="url" maxlength="300" placeholder="https://"></div>
+      </div><div class="form-footer"><span class="form-error" id="formError"></span><button class="primary-btn" type="submit">保存到目录</button></div>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script>
+  (()=>{
+    const seed=[
+      {id:'suek',name:'Suek-Me-Plasma(?)',year:1989,parentId:null,founders:'Talla 2XLC',genres:['Hard House','Techno'],status:'unknown',notes:'参考图片中名称及成立年份带有待确认标记。'},
+      {id:'abfahrt',name:'Abfahrt Records',year:1990,parentId:null,founders:'Torsten Fenslau',genres:['Hard House'],status:'unknown'},
+      {id:'mfs',name:'MFS',year:1990,parentId:null,founders:'Mark Reeder',genres:['Ambient','Techno'],status:'unknown',notes:'MFS 据称意为 “Masterminded For Success”。'},
+      {id:'realcomm',name:'4 Real Communications',year:1990,parentId:null,founders:'Salt Tank',genres:['Progressive'],status:'unknown'},
+      {id:'eyeq',name:'Eye Q Music',year:1991,parentId:null,founders:'Sven Väth, Matthias Hoffmann, Heinz Roth',genres:['House','Techno'],status:'unknown'},
+      {id:'eyeq-records',name:'Eye Q Records',year:1991,parentId:'eyeq',founders:'Sven Väth, Matthias Hoffmann, Heinz Roth',genres:['Progressive'],status:'unknown'},
+      {id:'hooj',name:'Hooj Choons(?)',year:1991,parentId:null,founders:'Red Jerry, Phil Howells',genres:['Progressive House'],status:'unknown',notes:'图片备注显示 2007 年重启。'},
+      {id:'mos',name:'Ministry of Sound',year:1991,parentId:null,founders:'',entity:'Ministry of Sound Records Ltd.',genres:['House','Techno'],status:'active'},
+      {id:'rising-high',name:'Rising High Records',year:1992,parentId:null,founders:'Casper Pound',genres:['Acid House','Techno'],status:'unknown'},
+      {id:'id-t',name:'ID&T',year:1992,parentId:null,founders:'Duncan Stutterheim, Theo Lelie',genres:['Gabber','Hardcore'],status:'active',notes:'参考图注记为活动组织方相关实体。'},
+      {id:'harthouse',name:'Harthouse(?)',year:1992,parentId:null,founders:'Sven Väth, Matthias Hoffmann, Heinz Roth',genres:['Acid House','Techno'],status:'unknown'},
+      {id:'platipus',name:'Platipus Records',year:1993,parentId:null,founders:'Simon Berry',genres:['Progressive'],status:'active'},
+      {id:'positiva',name:'Positiva',year:1993,parentId:null,founders:'Nick Halkes, Dave Lambert',entity:'EMI Records',genres:['House'],status:'inactive',notes:'图片标注其曾为 EMI Records 子厂牌，后归属变化待核实。'},
+      {id:'superstition',name:'Superstition Records(?)',year:1993,parentId:null,founders:'Tobias Lampe, Marc Chung',genres:['Hard House','Techno'],status:'unknown'},
+      {id:'recoverworld',name:'RecoverWorld Label Group',year:1994,parentId:null,founders:'',genres:['Trance'],status:'active'},
+      {id:'discover',name:'Discover Records',year:2002,parentId:'recoverworld',founders:'',genres:['Progressive','Uplifting'],status:'active'},
+      {id:'digital-remedy',name:'Digital Remedy',year:2006,parentId:'recoverworld',founders:'',genres:['Hard Trance'],status:'active'},
+      {id:'tetsuo',name:'Tetsuo',year:1995,parentId:null,founders:'Talla 2XLC',genres:['Acid Trance'],status:'unknown'},
+      {id:'xtravaganza',name:'Xtravaganza Recordings',year:1995,parentId:null,founders:'Alex Gold',genres:['Progressive'],status:'unknown'},
+      {id:'dreamdance',name:'Dream Dance',year:1996,parentId:null,founders:'',genres:['House'],status:'active',notes:'图片注记为发行合辑的厂牌标识。'},
+      {id:'harmony',name:'Harmony Recordings',year:1996,parentId:null,founders:'',genres:['Progressive'],status:'unknown'},
+      {id:'blackhole',name:'Black Hole Recordings B.V.',year:1997,parentId:null,founders:'Antony van der Vliet, Tijs Verwest',genres:['House','Progressive'],status:'active'},
+      {id:'in-trance',name:'In Trance We Trust',year:1998,parentId:'blackhole',founders:'Arny Bink, Tijs Verwest',genres:['Trance'],status:'active'},
+      {id:'magik',name:'Magik Muzik',year:2000,parentId:'blackhole',founders:'Tiësto',genres:['Trance'],status:'active'},
+      {id:'goodas',name:'good:as',year:1998,parentId:null,founders:'Graham Gold',genres:['Progressive','Psychedelic'],status:'unknown'},
+      {id:'armada',name:'Armada Music B.V.',year:2003,parentId:null,founders:'Armin van Buuren, Maykel Piron, David Lewis',entity:'Armada Music B.V.',genres:['Trance','House'],status:'active'},
+      {id:'armada-records',name:'Armada Records',year:1999,parentId:'armada',founders:'Armin van Buuren',genres:['Trance'],status:'active',notes:'图片中的示例条目；母公司沿革与此处的层级关系待复核。'},
+      {id:'asot',name:'A State of Trance',year:2001,parentId:'armada',founders:'Armin van Buuren',genres:['Uplifting','Progressive'],status:'active'},
+      {id:'enhanced',name:'Enhanced Music Limited',year:2008,parentId:null,founders:'Will Holland',entity:'Enhanced Music Limited',genres:['Progressive','Uplifting'],status:'active'},
+      {id:'enhanced-rec',name:'Enhanced Recordings',year:2007,parentId:'enhanced',founders:'Will Holland, Tritonal',genres:['Progressive','Uplifting'],status:'active'}
+    ];
+    const labelSearch=name=>`https://www.discogs.com/search/?q=${encodeURIComponent(name)}&type=label`;
+    const researchRows=[
+      ['perfecto','Perfecto Records',1989,null,'Paul Oakenfold',['Trance','Progressive Trance'],'United Kingdom','active'],
+      ['renaissance','Renaissance Records',1992,null,'Geoff Oakes',['Progressive Trance','Trance'],'United Kingdom','unknown'],
+      ['lightning','Lightning Records',1989,null,'',['Hard Trance','Trance'],'Belgium','unknown'],
+      ['bonzai','Bonzai Records',1992,'lightning','Marcel Achten',['Hard Trance','Trance'],'Belgium','active'],
+      ['bonzai-jumps','Bonzai Jumps',1994,'bonzai','',['Hard Trance'],'Belgium','unknown'],
+      ['bonzai-tp','Bonzai Trance Progressive',1995,'bonzai','',['Progressive Trance'],'Belgium','unknown'],
+      ['bonzai-limited','Bonzai Limited',1997,'bonzai','',['Trance','Hard Trance'],'Belgium','unknown'],
+      ['time-unlimited','Time Unlimited',1993,null,'',['Hard Trance','Trance'],'Germany','unknown'],
+      ['noom','Noom Records',1993,null,'Oliver Lieb',['Trance','Hard Trance'],'Germany','unknown'],
+      ['tracid-traxxx','Tracid Traxxx',1997,null,'Kai Tracid',['Acid Trance','Hard Trance'],'Germany','inactive'],
+      ['tidy-trax','Tidy Trax',1995,null,'',['Hard Trance'],'United Kingdom','unknown'],
+      ['tidy-two','Tidy Two',1998,'tidy-trax','',['Hard Trance'],'United Kingdom','unknown'],
+      ['free-for-all','Free For All',1994,null,'',['Trance','Hard Trance'],'Belgium','unknown'],
+      ['neo-records','Neo Records',1993,null,'',['Trance','Progressive Trance'],'United Kingdom','unknown'],
+      ['additive','Additive Records',1998,null,'',['Trance','Progressive Trance'],'United Kingdom','unknown'],
+      ['manifesto','Manifesto Records',1995,null,'',['Trance'],'United Kingdom','unknown'],
+      ['threebeat','3 Beat Records',1990,null,'',['Trance'],'United Kingdom','unknown'],
+      ['deviant','Deviant Records',1996,null,'',['Trance','Progressive Trance'],'United Kingdom','unknown'],
+      ['nebula','Nebula',1997,null,'',['Trance','Progressive Trance'],'United Kingdom','unknown'],
+      ['tunnel','Tunnel Records',1995,null,'',['Hard Trance'],'Germany','unknown'],
+      ['adjusted','Adjusted Music',2003,null,'The Thrillseekers',['Trance','Progressive Trance'],'United Kingdom','unknown'],
+      ['afterglow','Afterglow',1996,null,'',['Trance','Progressive Trance'],'Germany','unknown'],
+      ['ava','AVA Recordings',2006,null,'Andy Moor',['Trance','Progressive Trance'],'United Kingdom','active'],
+      ['ava-white','AVA White',2011,'ava','',['Uplifting Trance','Trance'],'United Kingdom','active'],
+      ['beyourself','Be Yourself Music',2006,null,'',['Trance'],'Netherlands','active'],
+      ['captured','Captured Music',2004,null,'Mike Shiver',['Trance','Progressive Trance'],'Sweden','unknown'],
+      ['coldharbour','Coldharbour Recordings',2004,null,'Markus Schulz',['Progressive Trance','Trance'],'United States','active'],
+      ['doorn','DOORN Records',2007,'armada','Sander van Doorn',['Trance','Tech Trance'],'Netherlands','active'],
+      ['deepblue','Deepblue Records',2000,null,'Solarstone',['Progressive Trance','Trance'],'United Kingdom','unknown'],
+      ['electronic-elements','Electronic Elements',2004,null,'Perry O’Neil',['Progressive Trance','Trance'],'Netherlands','unknown'],
+      ['euphonic','Euphonic',1997,null,'Kyau & Albert',['Trance','Progressive Trance'],'Germany','active'],
+      ['high-contrast','High Contrast Recordings',2002,'beyourself','Marcel Woods',['Trance','Tech Trance'],'Netherlands','unknown'],
+      ['intuition','Intuition Recordings',2004,null,'Menno de Jong',['Trance','Progressive Trance'],'Netherlands','unknown'],
+      ['monster-tunes','Monster Tunes',1998,null,'',['Trance','Uplifting Trance'],'United Kingdom','unknown'],
+      ['organized-nature','Organized Nature',2001,null,'Gabriel & Dresden',['Progressive Trance'],'United States','unknown'],
+      ['solaris','Solaris Recordings',2003,null,'Solarstone',['Trance','Progressive Trance'],'United Kingdom','unknown'],
+      ['supra','Supra Recordings',2005,null,'',['Trance','Progressive Trance'],'Germany','unknown'],
+      ['yakuza','Yakuza',2005,null,'',['Trance','Uplifting Trance'],'Netherlands','unknown'],
+      ['armind','Armind',2005,'armada','Armin van Buuren',['Trance','Uplifting Trance'],'Netherlands','active'],
+      ['armada-captivating','Armada Captivating',2017,'armada','',['Trance','Uplifting Trance'],'Netherlands','active'],
+      ['wao138','Who’s Afraid Of 138?!',2013,'armada','Armin van Buuren',['Uplifting Trance','Hard Trance'],'Netherlands','active'],
+      ['captivating-sounds','Captivating Sounds',2004,'armada','',['Trance','Uplifting Trance'],'Netherlands','unknown'],
+      ['songbird','Songbird',2000,'blackhole','Tiësto',['Progressive Trance','Trance'],'Netherlands','unknown'],
+      ['fsoe','FSOE Recordings',2003,null,'Aly & Fila',['Trance','Uplifting Trance'],'Egypt','active'],
+      ['fsoe-excelsior','FSOE Excelsior',2014,'fsoe','',['Progressive Trance','Trance'],'Egypt','unknown'],
+      ['fsoe-clandestine','FSOE Clandestine',2016,'fsoe','',['Tech Trance','Trance'],'Egypt','active'],
+      ['fsoe-fables','FSOE Fables',2017,'fsoe','',['Trance','Uplifting Trance'],'Egypt','active'],
+      ['fsoe-uv','FSOE UV',2020,'fsoe','',['Trance','Uplifting Trance'],'Egypt','active'],
+      ['abora','Abora Recordings',2010,null,'',['Trance','Uplifting Trance','Progressive Trance'],'United States','active'],
+      ['suanda','Suanda Music',2010,null,'Roman Messer',['Trance','Uplifting Trance'],'Cyprus','active'],
+      ['rnm','Raz Nitzan Music',2002,null,'Raz Nitzan',['Trance','Vocal Trance'],'Netherlands','active'],
+      ['amsterdam-trance','Amsterdam Trance Records',2007,'rnm','',['Trance','Vocal Trance'],'Netherlands','active'],
+      ['always-alive','Always Alive Recordings',2011,null,'Daniel Kandi',['Trance','Uplifting Trance'],'Denmark','active'],
+      ['subculture','Subculture',2012,null,'John O’Callaghan',['Trance','Uplifting Trance'],'Ireland','active'],
+      ['outburst','Outburst Records',2012,null,'Mark Sherry',['Trance','Tech Trance'],'United Kingdom','active'],
+      ['digital-society','Digital Society Recordings',2010,null,'',['Trance','Uplifting Trance'],'United Kingdom','active'],
+      ['grotesque','Grotesque Music',2011,null,'Ram',['Trance','Uplifting Trance'],'Netherlands','active'],
+      ['grotesque-fusion','Grotesque Fusion',2015,'grotesque','',['Trance','Uplifting Trance'],'Netherlands','active'],
+      ['nocturnal-knights','Nocturnal Knights Music',2016,null,'Bryan Kearney',['Trance','Uplifting Trance'],'Ireland','active'],
+      ['nocturnal-knights-fusion','Nocturnal Knights Fusion',2020,'nocturnal-knights','',['Trance','Tech Trance'],'Ireland','active'],
+      ['nocturnal-animals','Nocturnal Animals',2018,null,'',['Trance','Tech Trance'],'Ireland','unknown'],
+      ['future-sequence','Future Sequence',2019,null,'',['Trance','Uplifting Trance'],'United Kingdom','active'],
+      ['vii','VII',2017,null,'',['Trance','Tech Trance'],'United Kingdom','active'],
+      ['uplift','Uplift Records',2018,null,'Darren Porter',['Trance','Uplifting Trance'],'United Kingdom','active'],
+      ['regenerate','Regenerate Records',2013,null,'',['Trance','Uplifting Trance'],'United Kingdom','active'],
+      ['kearnage','Kearnage Recordings',2014,null,'Bryan Kearney',['Trance','Tech Trance'],'Ireland','active'],
+      ['damaged','Damaged Records',2009,null,'Jordan Suckley',['Trance','Tech Trance'],'United Kingdom','active'],
+      ['go-music','GO Music',2007,null,'Giuseppe Ottaviani',['Trance','Uplifting Trance'],'Germany','active'],
+      ['pure-trance','Pure Trance',2012,null,'Solarstone',['Trance','Progressive Trance'],'United Kingdom','active'],
+      ['pure-trance-neon','Pure Trance NEON',2018,'pure-trance','',['Trance','Uplifting Trance'],'United Kingdom','active'],
+      ['find-your-harmony','Find Your Harmony',2018,null,'Andrew Rayel',['Trance','Uplifting Trance'],'Moldova','active'],
+      ['unkonscious','Unkonscious Recordings',2015,null,'',['Trance','Uplifting Trance'],'Thailand','active'],
+      ['interplay','Interplay Records',2013,null,'Roman Messer',['Trance','Uplifting Trance'],'Cyprus','active'],
+      ['blue-soho','Blue Soho Recordings',2009,null,'',['Trance','Progressive Trance'],'Turkey','active'],
+      ['extrema-global','Extrema Global Music',2011,null,'',['Trance','Uplifting Trance'],'Spain','active'],
+      ['redux','Redux Recordings',2006,null,'',['Trance','Uplifting Trance'],'Germany','active'],
+      ['reason-rise','Reason II Rise Music',2018,null,'',['Trance','Uplifting Trance'],'United Kingdom','active'],
+      ['state-control','State Control Records',2014,null,'',['Trance','Uplifting Trance'],'Greece','active'],
+      ['cold-blue','Cold Blue Records',2018,null,'Cold Blue',['Trance','Uplifting Trance'],'Germany','active'],
+      ['dreamstate','Dreamstate',2015,null,'Insomniac Events',['Trance','Uplifting Trance'],'United States','active'],
+      ['mental-asylum','Mental Asylum Records',2010,null,'',['Trance','Tech Trance'],'United Kingdom','active'],
+      ['beyond-stars','Beyond The Stars Recordings',2012,null,'',['Trance','Uplifting Trance'],'Ukraine','active'],
+      ['siradrian','SirAdrianMusic',2014,null,'Adrian Alexander',['Trance','Uplifting Trance'],'United States','active'],
+      ['digital-euphoria','Digital Euphoria',2018,null,'',['Trance','Uplifting Trance'],'United Kingdom','active'],
+      ['pure-trance-progressive','Pure Trance Progressive',2015,'pure-trance','',['Progressive Trance'],'United Kingdom','active'],
+      ['enhanced-progressive','Enhanced Progressive',2009,'enhanced','',['Progressive Trance'],'United Kingdom','active'],
+      ['lostly-music','Lostly Music',2020,null,'Lostly',['Trance','Tech Trance'],'United Kingdom','active'],
+      ['chasing-dreams','Chasing Dreams Music',2018,null,'',['Trance','Uplifting Trance'],'United Kingdom','active'],
+      ['animarum','Animarum Recordings',2018,null,'',['Trance','Uplifting Trance'],'United Kingdom','active'],
+      ['technoclub-pure','Technoclub Pure',2016,null,'Talla 2XLC',['Trance','Uplifting Trance'],'Germany','active'],
+      ['ferric','Ferric',2021,null,'',['Trance','Tech Trance'],'United Kingdom','unknown'],
+      ['the-analog-class','The Analog Class',2022,null,'',['Trance','Progressive Trance'],'Germany','unknown'],
+      ['purple-haze','Purple Haze Records',2018,null,'Purple Haze',['Trance','Tech Trance'],'Netherlands','unknown'],
+      ['reaching-altitude','Reaching Altitude',2021,'armada','Armin van Buuren',['Trance','Progressive Trance'],'Netherlands','active'],
+      ['rielism','Rielism',2012,null,'ReOrder',['Trance','Uplifting Trance'],'Netherlands','active'],
+      ['five-am','Five AM Records',2002,null,'',['Trance','Progressive Trance'],'United Kingdom','unknown'],
+      ['somatic-sense','Somatic Sense Recordings',2001,null,'',['Progressive Trance','Trance'],'United Kingdom','unknown'],
+      ['go-on-air','Go On Air Recordings',2015,null,'Markus Schulz',['Trance','Progressive Trance'],'United States','active'],
+      ['one-forty','One Forty Music',2012,null,'',['Trance','Uplifting Trance'],'United Kingdom','active'],
+      ['discover-dark','Discover Dark',2006,'recoverworld','',['Hard Trance','Trance'],'United Kingdom','unknown'],
+      ['reason-recordings','Reason Recordings',2018,null,'',['Trance','Uplifting Trance'],'United Kingdom','unknown'],
+      ['alter-ego','Alter Ego Records',2007,null,'',['Trance','Progressive Trance'],'United Kingdom','active'],
+      ['trance-allstars','Trance Allstars Records',1999,null,'',['Trance','Uplifting Trance'],'Germany','unknown'],
+      ['magic-island','Magic Island Records',2009,null,'Roger Shah',['Trance','Uplifting Trance'],'Germany','active'],
+      ['synergy-music','Synergy Music',2019,null,'',['Trance','Progressive Trance'],'United Kingdom','unknown']
+    ];
+    const researched=researchRows.map(([id,name,year,parentId,founders,genres,country,status])=>({id,name,year,parentId,founders,genres,country,status,notes:'Discogs 厂牌检索入口；成立年份和厂牌层级按公开资料初步整理，待逐条校订。',source:labelSearch(name)}));
+    seed.push(...researched);
+    // Entries transcribed from the user's nine reference screenshots. Screenshot annotations
+    // (cross-outs, question marks, genre labels and hierarchy) are retained as record notes.
+    const imageRows=[
+      ['infrasonic','Infrasonic Recordings',2007,null,'House',''],
+      ['banshee-worx','Banshee Worx BVBA',2003,null,'House, Techno',''],
+      ['mike-push','M.I.K.E. Push Studio',2015,null,'Progressive',''],
+      ['spinnin','Spinnin’ Records',1999,null,'Trance',''],
+      ['cloud9','Cloud 9 Dance',2006,null,'Trance',''],
+      ['unleashed','Unleashed Records',2008,null,'Trance',''],
+      ['aria-music-group','Aria Music Group',2009,null,'Progressive',''],
+      ['defcon','Defcon Recordings',2009,null,'Trance',''],
+      ['hu-music','HU Music Group',2009,null,'Trance',''],
+      ['atmosphere-uk','Atmosphere Records:UK',2008,null,'Hard',''],
+      ['echelon','Echelon Records',2008,null,'Tech',''],
+      ['above-all','Above All Recordings',2011,null,'Trance',''],
+      ['emergent','Emergent Music',2012,null,'House',''],
+      ['alveda','Alveda Music',2012,null,'House',''],
+      ['black-sunset','Black Sunset Music',2012,null,'Progressive',''],
+      ['pulsar','Pulsar Recordings',2011,null,'Trance',''],
+      ['trancer','Trancer Recordings',2014,null,'Uplifting',''],
+      ['entrancing','Entrancing Music',2014,null,'Trance',''],
+      ['fsoe-group','Future Sound of Egypt B.V.',2016,null,'Trance',''],
+      ['fsoe','FSOE Recordings',2009,'fsoe-group','Trance',''],
+      ['silent-shore','Silent Shore Recordings',2009,'abora','Trance',''],
+      ['involved','Involved Productions',2000,null,'Trance','年份带 [?]'],
+      ['pure-trance-recordings','Pure Trance Recordings',2014,null,'Progressive',''],
+      ['be-yourself','Be Yourself Music',2005,null,'Trance',''],
+      ['enhanced-rec','Enhanced Recordings',2005,'enhanced','House',''],
+      ['coldharbour','Coldharbour Recordings',2005,'blackhole','Progressive House',''],
+      ['perfecto','Perfecto Records',1989,'blackhole','Trance, Progressive Trance',''],
+      ['magik','Magik Muzik',2001,'blackhole','Trance',''],
+      ['songbird','Songbird',1997,'blackhole','Trance',''],
+      ['subculture','Subculture',2010,'armada','Tech, Uplifting',''],
+      ['go-for-it','Go For It',1996,'alphabet-city','Trance','划线；图片备注 2001 年停止'],
+      ['marc-et-claude','Marc et Claude’s',1999,'alphabet-city','Progressive',''],
+      ['planet-love-classics','Planet Love Classics',1992,'planet-love','Trance',''],
+      ['doorn','Doorn Records',2007,'spinnin','House',''],
+      ['anjunabeats','Anjunabeats',2000,'involved','Trance','Jono Grant、Paavo Siljamäki、Tony McGuinness'],
+      ['abora-llc','Abora Recordings LLC',2004,null,'Trance','图片注明 Ori Uplift 为 CEO / Owner'],
+      ['abora','Abora Recordings',2004,'abora-llc','Melodic, Progressive, Uplifting',''],
+      ['rnm','Raz Nitzan Music',2009,null,'Trance','截图年份带 [?]'],
+      ['suanda','Suanda Music',2013,null,'House',''],
+      ['mental-asylum','Mental Asylum Recordings',2012,null,'Psychedelic, Tech','图片标注 2012–2018 为 Freedom Fighters Records 子厂牌；2017 年独立'],
+      ['mental-asylum-black','Mental Asylum Black',2018,'mental-asylum','Tech',''],
+      ['mental-asylum-white','Mental Asylum White',2018,'mental-asylum','Tech',''],
+      ['go-on-air','Go On Air Recordings',2017,'go-music','Uplifting','图片备注：Go Music 于 2014–2017 年使用该名称'],
+      ['bonzai-music','Bonzai Music',2003,'banshee-worx','Hard','名称带 [?]'],
+      ['subtraxx','Subtraxx Recordings',2004,'banshee-worx','Trance','名称带 [?]'],
+      ['digital-trance','Digital Trance Records',2006,'banshee-worx','Trance','名称带 [?]'],
+      ['abfahrt','Abfahrt Records',1990,null,'Hard House','划线；年份和风格照录，待核实'],
+      ['realcomm','4 Real Communications',1991,null,'Progressive','划线'],
+      ['mos-data','Data Records',1999,'mos','House, Techno','划线'],
+      ['mos-excession','Excession',2000,'mos','Breaks','划线'],
+      ['rising-high','Rising High Records',1991,null,'Acid House, Techno','图片备注：Rising High Productions Ltd. 已注销，但厂牌仍活跃'],
+      ['alphabet-city','Alphabet City',1992,null,'House','名称带 [?]'],
+      ['go-for-it','Go For It',1996,null,'Trance','划线；图片备注 2001 年停止'],
+      ['marc-et-claude','Marc et Claude’s',1999,null,'Progressive',''],
+      ['harthouse','Harthouse',1992,null,'Acid House, Techno','名称带 [?]；图片含多段停运/重启沿革'],
+      ['id-t','ID&T',1992,null,'Gabber, Hardcore','图片备注：唱片厂牌实体（非音乐节主办方）'],
+      ['id-t-etr','European Trance Records',1995,'id-t','Trance','划线'],
+      ['id-t-nonstop','Non-Stop Records',1995,'id-t','Trance','划线'],
+      ['id-t-xs','XS',1995,'id-t','Techno',''],
+      ['id-t-buddha','Buddha',1996,'id-t','Goa',''],
+      ['id-t-stereoscope','Stereoscope',1996,'id-t','Acid',''],
+      ['id-t-dreamplant','Dreamplant Records',1996,'id-t','Trance',''],
+      ['lightning','Lightning Records',1992,null,'Trance','母厂牌关系照截图录入'],
+      ['bonzai','Bonzai Records',1992,'lightning','Hard','划线'],
+      ['axme','Axme',1996,'lightning','Trance',''],
+      ['idanger','IDanger',1997,'lightning','Hard, Techno',''],
+      ['moonshine','Moonshine Music',1992,null,'Acid, Hard, House, Techno',''],
+      ['planet-love','Planet Love Records',1992,null,'Trance','划线；Planet Love Classics 为关联名称'],
+      ['hook-recordings','Hook Recordings',1993,null,'Trance','名称带 [?]'],
+      ['platipus-sub','Platipus',1994,'platipus','Acid',''],
+      ['superstition','Superstition',1993,null,'Ambient, Techno','名称带 [?]'],
+      ['aqualoop-prod','Aqualoop Productions GmbH',1994,null,'Trance',''],
+      ['aqualoop-records','Aqualoop Records',2000,'aqualoop-prod','Hard',''],
+      ['metropolitan','Metropolitan Music',1994,'recoverworld','Trance',''],
+      ['eve-records','Eve Records',1995,'recoverworld','Trance','名称带 [?]'],
+      ['eve-nova','Eve Nova',1999,'eve-records','Progressive','名称带 [?]'],
+      ['first-records','First Records',1999,'eve-records','Trance','名称带 [?]'],
+      ['felice','Felice',1997,'eve-records','Progressive',''],
+      ['dateless','Dateless Recordings',2003,'recoverworld','Hard',''],
+      ['flex-delux','Flex Delux',2004,'recoverworld','Trance',''],
+      ['flex-delux-limited','Flex Delux Limited',2008,'flex-delux','Trance','名称带 [?]'],
+      ['nu-depth','nu-depth Recordings',2007,'recoverworld','Trance','名称带 [?]；图片标注 2007–2013'],
+      ['slinky-digital','Slinky Digital',2007,'recoverworld','Trance','名称带 [?]'],
+      ['discover-white','Discover White Label',2008,'recoverworld','Trance',''],
+      ['kill-the-lights','Kill The Lights',2008,'recoverworld','Trance',''],
+      ['discover-deep','Discover Deep',2011,'recoverworld','Progressive House',''],
+      ['lostalgia','Lostalgia Music',2014,'recoverworld','Trance','名称带 [?]'],
+      ['intense-emotions','Intense Emotions Records',2018,'recoverworld','Trance',''],
+      ['lethal-shots','Lethal Shots',2018,'recoverworld','Uplifting',''],
+      ['overdose','Overdose',1994,null,'Hard','划线'],
+      ['aquarius','Aquarius',1995,null,'Acid, Goa',''],
+      ['dream-dance','Dream Dance',1996,null,'House','图片备注：该厂牌只发行合辑'],
+      ['dreamstate-records','Dreamstate Records',1996,null,'Progressive',''],
+      ['harmony-recordings','Harmony Recordings',1996,null,'Trance','划线；图片括注 euphonie'],
+      ['purple-eye','Purple Eye Entertainment BV',1996,null,'House',''],
+      ['four-fingers','4 Fingers',1996,'purple-eye','Trance',''],
+      ['tivemolo','Tivemolo',1996,'purple-eye','Trance','名称按截图辨读，需核实'],
+      ['tsunami','Tsunami',1997,'purple-eye','Trance','名称带 [?]'],
+      ['polar-state','Polar State',1999,'purple-eye','Trance',''],
+      ['black-hole','Black Hole',1997,'blackhole','Trance',''],
+      ['perfecto-fluoro','Perfecto Fluoro',1999,'perfecto','Uplifting',''],
+      ['avanti','Avanti',1999,'blackhole','Trance','图片标注 1999–2000；2007 年重启'],
+      ['coldharbour-red','Coldharbour Red',2007,'coldharbour','Trance',''],
+      ['coldharbour-black','Coldharbour Black',2007,'coldharbour','Trance',''],
+      ['flashover','Flashover Recordings',2005,null,'Trance','图片标注 Ferry Corsten 创办/拥有'],
+      ['levare','Levare Recordings',2006,'flashover','Trance',''],
+      ['moody-moon','Moody Moon Recording',2010,'flashover','Trance','名称带 [?]；图片备注称 2011 年停止'],
+      ['premier','Premier',2010,'flashover','Progressive',''],
+      ['flashback','Flashback',2011,'flashover','Trance','名称带 [?]；图片备注为 Ferry Corsten 子厂牌'],
+      ['flashover-trance','Flashover Trance',2014,'flashover','Trance',''],
+      ['flashover-black','Flashover Black',2016,'flashover','Trance',''],
+      ['serious-records','Serious Records',1998,'infrasonic','Trance','截图将其列于 Infrasonic 分支；年份早于母厂牌，层级待核对'],
+      ['interstate','Interstate Recordings',2011,'infrasonic','Tech',''],
+      ['insessions','InSessions Recordings',2012,'infrasonic','Progressive House',''],
+      ['infrasonic-pure','Infrasonic Pure',2014,'infrasonic','Trance',''],
+      ['infrared','InfraRed',2016,'infrasonic','Trance',''],
+      ['subculture','Subculture',2010,null,'Tech, Uplifting','图片标注 2010–2013 为 Armada 子厂牌'],
+      ['toneplay','Toneplay Records',2011,null,'Trance','划线'],
+      ['tytanium','Tytanium Recordings',2011,null,'Trance','名称带 [?]；截图标注隶属变化'],
+      ['ride','Ride Recordings',2013,null,'Progressive',''],
+      ['ultraviolet','UltraViolet Music',2013,null,'Progressive',''],
+      ['wake-your-mind','Wake Your Mind Records',2013,null,'Trance','图片标注 Cosmic Gate 创办'],
+      ['driftmoon-audio','Driftmoon Audio',2014,null,'Trance','图片标注后成为 Abora 子厂牌'],
+      ['go-music','Go Music',2014,null,'Uplifting','图片标注 2014–2017，后更名为 Go On Air Recordings'],
+      ['planet-love-classics-20','Planet Love Classics 2.0',2014,null,'Trance','名称带 [?]'],
+      ['planet-love-records-20','Planet Love Records 2.0',2014,null,'Trance','划线；名称带 [?]'],
+      ['pure-progressive','Pure Progressive',2015,'pure-trance-recordings','Progressive','图片备注：原名 Pure Trance Progressive'],
+      ['pure-neon','Pure Trance NEON',2016,'pure-trance-recordings','Uplifting',''],
+      ['mike-push-indigo','M.I.K.E. Push Studio Indigo',2016,'mike-push','Progressive',''],
+      ['reloaded-music','Reloaded Music',2015,null,'Tech, Uplifting',''],
+      ['afterdark','Afterdark',2016,null,'Tech',''],
+      ['regenerated','Regenerated Records',2016,null,'Psychedelic, Tech, Uplifting','图片标注 2016–2018 名为 Regenerated Records'],
+      ['universal-nation','Universal Nation',2016,null,'Trance',''],
+      ['be-the-change','Be The Change Records',2017,null,'Progressive','名称带 [?]'],
+      ['heavensgate','HeavensGate',2017,null,'Trance',''],
+      ['hte','HTE Recordings',2017,null,'Hard, Uplifting','HTE 为 Hard Trance Europe 缩写'],
+      ['dinamode','Dinamode Records',2018,null,'Psychedelic',''],
+      ['serendipity','Serendipity Muzik',2018,null,'Trance',''],
+      ['deep-in-thought','Deep In Thought',2019,null,'Vocal',''],
+      ['gang-go','Gang-Go Music',1997,null,'Trance',''],
+      ['iboga','Iboga Records',1997,null,'Progressive House, Techno',''],
+      ['iboga-trance','Iboga Trance',2011,'iboga','Psychedelic','名称带 [?]'],
+      ['future-music','Future Music Records',2016,'iboga','Psychedelic',''],
+      ['kontor','Kontor Records',1997,null,'House, Techno',''],
+      ['massive-drive','Massive Drive Recordings',1997,null,'Uplifting',''],
+      ['deepblue','Deepblue Records Ltd.',1998,null,'Trance','图片标注 Andy Bury 与 Richard Mowatt'],
+      ['joof','JOOF Recordings',1998,null,'Progressive, Psychedelic',''],
+      ['joof-deep','JOOF Deep',2005,'joof','Trance','划线'],
+      ['joof-mantra','JOOF Mantra',2011,'joof','Progressive, Psychedelic','图片备注：2011–2015 名为 JOOF V.2'],
+      ['joof-aura','JOOF Aura',2018,'joof','Progressive',''],
+      ['ppk','PPK Records',1998,null,'Trance','名称带 [?]'],
+      ['atcr','A Trance Communication Release',1999,null,'Trance','名称带 [?]；有 ATCR 缩写'],
+      ['five-am','Five AM',1999,null,'Trance','划线；图片标注创办人 Gareth Emery 与 Alexis Hooper'],
+      ['liquid-asset','Liquid Asset Recordings',1999,null,'Progressive','名称带 [?]；图片备注 2003 年后无发行'],
+      ['mazeman','Mazeman',1999,null,'Hard Trance',''],
+      ['pvd-gmbh','Paul van Dyk GmbH',1999,null,'Trance',''],
+      ['vandit','Vandit Records',1999,'pvd-gmbh','Trance','图片备注：2010–2013 与 Armada 合作，2013 后由 Believe Digital 发行'],
+      ['vandit-next','Vandit Next Generation',2019,'vandit','Trance',''],
+      ['vandit-digital','Vandit Digital',2008,'pvd-gmbh','Trance','名称带 [?]；图片备注 2010 年后无发行'],
+      ['silicon','Silicon Recordings',1999,null,'Trance','名称带 [?]'],
+      ['spinnin-jinx','Jinx Recordings',1993,'spinnin','Techno','名称带 [?]'],
+      ['spinnin-2play','2 Play Records',1996,'spinnin','Tech','名称带 [?]；图片备注其隶属变化'],
+      ['night-vision','Night Vision',2011,'spinnin','Trance','名称带 [?]'],
+      ['baroque','Baroque Records',2000,null,'House, Techno',''],
+      ['diverse-system','Diverse System',2000,null,'Drum & Bass, House',''],
+      ['involved','Involved Productions',2000,null,'Trance','名称带 [?]'],
+      ['hard-on','Hard-On Recordings',2000,'involved','Hard','名称带 [?]；图片备注 2012 年后无发行'],
+      ['anjunadeep','Anjunadeep',2005,'involved','Progressive House',''],
+      ['lost-language','Lost Language',2000,null,'Trance','图片备注 2000–2003 为 Hooj 子厂牌'],
+      ['sedna','Sedna Recordings',2007,'lost-language','Trance','名称带 [?]'],
+      ['mondo','Mondo Records',2000,null,'House',''],
+      ['alliance-music','Alliance Music',2001,null,'Trance','年份带 [?]'],
+      ['afterglow-records','Afterglow Records',2003,'alliance-music','Trance',''],
+      ['fireglow','Fireglow Records',2004,'afterglow-records','Progressive','名称带 [?]'],
+      ['tool-trance','Tool Trance',2010,'alliance-music','Trance','名称带 [?]；图片备注 2016 年后无发行'],
+      ['avex-trance','Avex Trance',2001,null,'Trance',''],
+      ['disco-imperio','Disco Imperio Corporation',2001,null,'Trance','图片备注 2001–2005 后更名为 Dreams Corporation'],
+      ['twenty-four','Twenty Four Records',2003,'disco-imperio','Trance',''],
+      ['maelstrom','Maelstrom Records',2001,null,'Progressive',''],
+      ['cyber-records','Cyber Records',1994,'armada','House','名称带 [?]；图片标注 1994–2001 独立'],
+      ['modena','Modena Records',1995,'armada','Progressive','图片标注 1995–2008 为 Armada 子厂牌'],
+      ['armada-captivating-old','Armada Captivating',2000,'armada','Trance','图片标注后更名为 Captivating Sounds'],
+      ['club-elite','Club Elite',2003,'armada','Progressive','M.I.K.E. 创办；名称带 [?]'],
+      ['soundpiercing','Soundpiercing',2003,'armada','Tech, Vocal','名称带 [?]；图片备注 2011 年后无发行'],
+      ['organized-nature','Organized Nature',2005,'armada','Progressive','名称带 [?]；图片注明独立时期与 Armada 时期'],
+      ['statement','Statement! Recordings',2006,'armada','Progressive',''],
+      ['pilot6','Pilot6 Recordings',2007,'armada','Progressive','名称带 [?]；图片备注名称来自 Armada 阿姆斯特丹办公室所在街道'],
+      ['different-pieces','Different Pieces',2008,'armada','Progressive','名称带 [?]；图片标注 2008–2010，之后无发行'],
+      ['aropa','Aropa Records',2009,'armada','Progressive, Vocal',''],
+      ['garuda','Garuda Music',2009,'armada','Progressive House','图片标注 2009–2015 独立'],
+      ['s107','S107 Recordings',2009,'armada','Progressive, Vocal','名称带 [?]；图片备注 2016 年后无发行'],
+      ['in-my-opinion','In My Opinion',2013,'armada','Trance','Ojan Nilsen 创办'],
+      ['who-afraid-138','Who’s Afraid Of 138?!',2013,'armada','Trance','名称带 [?]；常缩写为 WAO138?!'],
+      ['goldrush','Goldrush Recordings',2014,'armada','Trance',''],
+      ['aerys','Aerys Records',2017,'armada','Trance','名称带 [?]'],
+      ['inharmony','inHarmony Music',2017,'armada','Trance',''],
+      ['reaching-altitude','Reaching Altitude',2017,'armada','Trance',''],
+      ['bonzai-music','Bonzai Music',2003,'lightning','Hard','名称带 [?]'],
+      ['subtraxx','Subtraxx Recordings',2004,'lightning','Trance','名称带 [?]'],
+      ['digital-trance','Digital Trance Records',2006,'lightning','Trance','名称带 [?]'],
+      ['critical-rhythm','Critical Rhythm',2003,null,'Trance',''],
+      ['unity','Unity Records',2000,'critical-rhythm','Trance','名称带 [?]；图片备注 2001 年重启'],
+      ['fenology','Fenology Records',2003,null,'Trance','名称带 [?]；图片备注 2014 年后无发行'],
+      ['somatic-sense','Somatic Sense Recordings',2003,null,'Trance','图片备注 2008 年停止'],
+      ['zenith','Zenith Records',2003,null,'Trance','年份带 [?]；名称带 [?]'],
+      ['silent-shore-deep','Silent Shore Deep',2010,'silent-shore','Trance',''],
+      ['silent-shore-white','Silent Shore White',2011,'silent-shore','Uplifting',''],
+      ['trancendental','Trancendental Recordings',2012,'abora','Uplifting',''],
+      ['levitated','Levitated Music',2014,'abora','Progressive, Uplifting',''],
+      ['abora-skies','Abora Skies',2013,'abora','Uplifting',''],
+      ['edge-one','Edge One',2013,'abora','Psychedelic, Tech, Uplifting','图片备注 2013–2021 更名为 Edge EDM Records'],
+      ['abora-ascend','Abora Ascend',2014,'abora','Vocal',''],
+      ['abora-ole','Abora Olé',2016,'abora','Uplifting',''],
+      ['abora-progressive','Abora Progressive',2016,'abora','Progressive',''],
+      ['maraphobia','Maraphobia',2016,'abora','Trance',''],
+      ['maraphobia-essentials','Maraphobia Essentials',2017,'maraphobia','Progressive',''],
+      ['maraphobia-shaded','Maraphobia Shaded',2017,'maraphobia','Psychedelic, Tech',''],
+      ['maraphobia-vocalized','Maraphobia Vocalized',2017,'maraphobia','Vocal',''],
+      ['masana','Masana Records',2019,'abora','Trance',''],
+      ['intuitive-stellar','Stellar Sounds',2008,'intuition','Uplifting','划线'],
+      ['monster-force','Monster Force',2004,'monster-tunes','Trance',''],
+      ['monster-hard','Monster Hard',2004,'monster-tunes','Hard',''],
+      ['monster-tune','Monster Tune',2004,'monster-tunes','Trance',''],
+      ['monster-deep','Monster Deep',2008,'monster-tunes','Trance',''],
+      ['monster-pure','Monster Pure',2014,'monster-tunes','Trance',''],
+      ['free-for-all','Free For All',1998,'beyourself','Trance','图片标注 1998–2004 为 UHM 子厂牌，后重启'],
+      ['in-charge','In Charge Recordings',2005,'beyourself','House',''],
+      ['arenj','Arenj Music',2011,'beyourself','Progressive','名称带 [?]'],
+      ['light-n-loaded','Light-n-Loaded Records',2012,'beyourself','Trance','名称带 [?]'],
+      ['deep-forest','Deep Forest Recordings',2010,'redux','Progressive','名称带 [?]'],
+      ['destination-sunshine','Destination Sunshine',2010,'redux','Trance','名称带 [?]'],
+      ['balearic-sun','Balearic Sun Records',2011,'redux','Balearic, Progressive','名称带 [?]'],
+      ['condura','Condura Recordings',2012,'redux','Trance','名称带 [?]'],
+      ['nexgen','Nexgen Sounds Records',2012,'redux','Trance','名称带 [?]'],
+      ['redux-138','Redux 138',2014,'redux','Trance',''],
+      ['redux-magic','Redux Magic',2018,'redux','Trance',''],
+      ['redux-fantasy','Redux Fantasy',2021,'redux','Psychedelic, Tech',''],
+      ['phoenix-recordings','Phoenix Recordings',2006,'alter-ego','Trance',''],
+      ['alter-ego-pure','Alter Ego Pure',2006,'alter-ego','Trance',''],
+      ['inov8','Inov8 Recordings',2006,'alter-ego','Trance','名称带 [?]'],
+      ['edge-recordings','Edge Recordings',2009,'alter-ego','Trance','名称带 [?]'],
+      ['iamphoenix','IAMPHOENIX',2013,'alter-ego','House',''],
+      ['tangles-audio','Tangles Audio',2014,'alter-ego','Psychedelic, Tech, Uplifting',''],
+      ['deal-records','Deal Records',1996,'cloud9','Trance','名称带 [?]；图片标注 1996–2001 隶属 Combined Forces'],
+      ['bitter-sweet','Bitter-Sweet',2007,'cloud9','Trance',''],
+      ['more-moor','More Moor',2007,'cloud9','Trance','名称带 [?]；图片备注专属 Vincent de Moor'],
+      ['hard-trance-revolution','Hard Trance Revolution',2018,'atmosphere-uk','Hard',''],
+      ['echelon-white','Echelon White',2009,'echelon','Progressive',''],
+      ['enhanced-progressive','Enhanced Progressive',2005,'enhanced','Progressive',''],
+      ['air-up-there','Air Up There Recordings',2009,'enhanced','Progressive, Vocal','名称带 [?]'],
+      ['insight','Insight Recordings',2008,null,'Progressive','有时缩写为 ISR'],
+      ['crystal-source','Crystal Source Recordings',2009,'unleashed','Trance','名称带 [?]'],
+      ['unleashed-red','Unleashed Red',2009,'unleashed','Trance','名称带 [?]'],
+      ['profound','Profound Recordings',2013,'unleashed','Trance','名称带 [?]'],
+      ['aria-knights','Aria Knights',2012,'aria-music-group','Tech',''],
+      ['aria-recordings','Aria Recordings',2013,'aria-music-group','Trance',''],
+      ['selective','Selective Recordings',2004,'blue-soho','Trance','图片备注：该目录已售予 Blue Soho Recordings'],
+      ['moonrising','Moonrising Recordings',2006,'blue-soho','Trance','图片备注：该目录已售予 Blue Soho Recordings'],
+      ['fractal-digital','Fractal Digital',2010,'blue-soho','Trance','图片备注 2010–2012 独立'],
+      ['number-one','Number One Recordings',2010,'blue-soho','Trance',''],
+      ['white-soho','White Soho',2011,'blue-soho','Progressive',''],
+      ['xpm','XPM Recordings',2012,'blue-soho','Trance','图片注明目录售予 Komplex Sounds'],
+      ['red-soho','Red Soho',2013,'blue-soho','Progressive','名称带 [?]'],
+      ['sound-of-elysium','Sound of Elysium',2013,'blue-soho','Trance','名称带 [?]'],
+      ['dark-soho','Dark Soho',2014,'blue-soho','Tech',''],
+      ['vital-soho','Vital Soho',2014,'blue-soho','Uplifting','名称带 [?]'],
+      ['gent-trance','Gent Trance Division',2013,'defcon','Trance','图片备注：后更名为 Above The Clouds Recordings'],
+      ['vibrate-audio','Vibrate Audio',2017,'defcon','Progressive',''],
+      ['ihu-records','I Hate You Records',2009,'hu-music','House, Techno','名称带 [?]；图片备注 2021 年成为 Armada 子厂牌并更名 IHU Records'],
+      ['arkham-digital','Arkham Digital',2017,'hu-music','Uplifting, Vocal',''],
+      ['a-tribute-to-life','A Tribute To Life',2011,'rnm','Trance','图片标注 2011–2014 为 Black Hole 子厂牌'],
+      ['audentity','Audentity Records',2012,'rnm','Trance','名称带 [?]'],
+      ['molekular','Molekular Sounds',2012,'rnm','Trance',''],
+      ['frost','Frost Recordings',2013,'rnm','Trance',''],
+      ['aurosonic','Aurosonic Music',2014,'rnm','Trance','图片备注 2014 年后为 Adrian Music 子厂牌'],
+      ['essentializm','Essentializm',2014,'rnm','Trance',''],
+      ['uplift-recordings','Uplift Recordings',2018,'rnm','Uplifting',''],
+      ['beyond-the-star','Beyond The Star Recordings',2013,'trance-allstars','Uplifting',''],
+      ['liquid-energy','Liquid Energy Digital',2014,'trance-allstars','Trance','图片备注 2014 年后独立'],
+      ['reclublic','Reclublic Recordings',2014,'trance-allstars','Progressive, Chillout',''],
+      ['tar138','TAR#138',2017,'trance-allstars','Uplifting',''],
+      ['fsoe-parallels','FSOE Parallels',2017,'fsoe','Trance',''],
+      ['above-alternative','Above Alternative',2013,'above-all','Trance',''],
+      ['emergent-cities','Emergent Cities',2016,'emergent','Progressive',''],
+      ['emergent-skies','Emergent Skies',2016,'emergent','Uplifting',''],
+      ['alveda-liquid','Alveda Liquid',2017,'alveda','Trance',''],
+      ['black-sunset-platinum','Black Sunset Platinum',2019,'black-sunset','Uplifting',''],
+      ['pulsar-dark','Pulsar Dark',2014,'pulsar','Tech',''],
+      ['sir-adrian','Sir Adrian Music',2013,null,'Trance','名称带 [?]'],
+      ['how-trance-works','How Trance Works',2013,'sir-adrian','Trance','名称带 [?]；划线'],
+      ['trance-family','TranceFamily Records',2015,'sir-adrian','Trance','名称带 [?]；划线'],
+      ['suanda-true','Suanda True',2015,'suanda','Uplifting',''],
+      ['suanda-voice','Suanda Voice',2016,'suanda','Vocal',''],
+      ['suanda-dark','Suanda Dark',2017,'suanda','Tech',''],
+      ['suanda-progressive','Suanda Progressive',2017,'suanda','Progressive',''],
+      ['entrancing-energized','Entrancing Energized',2019,'entrancing','Trance',''],
+      ['subatomic','Subatomic Recordings',2015,'trancer','Trance','图片备注 2014–2016 名为 Trancer Energy Recordings'],
+      ['natura','Natura Recordings',2015,null,'Uplifting, Chillout',''],
+      ['praktikal','Praktikal Recordings',2015,null,'Tech, Uplifting',''],
+      ['supercell','Supercell Recordings',2015,null,'Tech, Uplifting','划线'],
+      ['denis-kenzo','Denis Kenzo Recordings',2016,null,'Trance','图片标注 2017 年起为 Armada 子厂牌'],
+      ['fsoe-fables','FSOE Fables',2017,'fsoe','Trance',''],
+      ['legacy-trance','Legacy of Trance Recordings',2016,null,'Trance',''],
+      ['skullduggery','Skullduggery',2016,null,'Trance',''],
+      ['excelsior','Excelsior Music',2017,null,'Trance','图片备注 2014–2017 为 FSOE 子厂牌，后更名 FSOE Excelsior'],
+      ['surrounded-audio','Surrounded Audio',2017,null,'Trance',''],
+      ['tranceffect','Tranceffect Records',2017,null,'Trance',''],
+      ['mass-recordings','MASS Recordings',2018,null,'Trance',''],
+      ['newcastle-friends','Newcastle Friends Recordings',2018,null,'Trance',''],
+      ['scorchin','Scorchin’ Records',2019,null,'Trance',''],
+      ['trancegression','Trancegression Recordings',2019,null,'Trance',''],
+      ['lunar','Lunary Records',2013,null,'House, Techno',''],
+      ['magic-trance','Magic Trance',2013,null,'Trance',''],
+      ['entrancing','Entrancing Music',2014,null,'Trance',''],
+      ['mythology','Mythology Records',2014,null,'Progressive House',''],
+      ['sunstate','Sunstate Records',2014,null,'Progressive House',''],
+      ['trancer','Trancer Recordings',2014,null,'Uplifting',''],
+      ['auditory','Auditory Recordings',2015,null,'Trance','图片标注 2015–2019 为 Black Hole 子厂牌'],
+      ['delaforce','Delaforce Recordings',2015,null,'Trance',''],
+      ['eximinds-airlines','Eximinds Airlines',2015,null,'Trance',''],
+      ['natura-recordings','Natura Recordings',2015,null,'Uplifting, Chillout',''],
+      ['xzatamusic','Xzata Music',2015,null,'House, Techno',''],
+      ['forescape','Forescape Digital',2016,null,'Progressive, Techno',''],
+      ['kapanadze','Kapanadze Recordings',2016,null,'Progressive',''],
+      ['legacy-of-trance','Legacy of Trance Recordings',2016,null,'Trance',''],
+      ['94trance','94Trance',2017,null,'Trance',''],
+      ['excellor','Excelsior Music',2017,null,'Trance','图片备注 2014–2017 为 FSOE 子厂牌，后更名 FSOE Excelsior'],
+      ['surrounded','Surrounded Audio',2017,null,'Trance',''],
+      ['newcastle-friends-recordings','Newcastle Friends Recordings',2018,null,'Trance',''],
+      ['trancegression-recordings','Trancegression Recordings',2019,null,'Trance','']
+    ];
+    const normalizeName=name=>String(name||'').toLocaleLowerCase().replace(/[^a-z0-9]/g,'');
+    const nameAliases={superstition:'superstitionrecords',deepbluerecordsltd:'deepbluerecords',fiveam:'fiveamrecords',monstertunesltd:'monstertunes',mentalasylumrecordings:'mentalasylumrecords'};
+    const normalizedSeed=()=>new Map(seed.map(x=>[normalizeName(x.name),x]));
+    const imageIds=new Map(),seenImageNames=new Set();
+    for(const [id,name,year,parentId,genreText,mark] of imageRows){
+      const nameKey=normalizeName(name);
+      if(seenImageNames.has(nameKey))continue;
+      seenImageNames.add(nameKey);
+      const existing=normalizedSeed().get(nameAliases[nameKey]||nameKey);
+      const note=`用户参考截图补录；${mark?mark+'；':''}截图风格：${genreText||'未标注'}。名称、年份、风格和厂牌关系依截图整理，尚待逐条核验。`;
+      const recordId=existing?.id||(seed.some(x=>x.id===id)?`image-${id}`:id);
+      imageIds.set(id,recordId);
+      if(existing){
+        if(year)existing.year=year;
+        if(parentId&&seed.some(x=>x.id===parentId))existing.parentId=parentId;
+        const tags=(genreText||'Trance').split(/[,，]/).map(x=>x.trim()).filter(Boolean);
+        existing.genres=[...new Set([...(existing.genres||[]),...tags])];
+        existing.notes=[existing.notes,note].filter(Boolean).join(' ');
+        existing.source=existing.source||labelSearch(name);
+      }else{
+        seed.push({id:recordId,name,year:year||null,parentId:null,founders:'',genres:(genreText||'Trance').split(/[,，]/).map(x=>x.trim()).filter(Boolean),status:'unknown',notes:note,source:labelSearch(name)});
+      }
+    }
+    for(const [id,, ,parentId] of imageRows){
+      const childId=imageIds.get(id),parentRecordId=imageIds.get(parentId)||parentId;
+      const child=seed.find(x=>x.id===childId);
+      if(child&&parentId&&seed.some(x=>x.id===parentRecordId))child.parentId=parentRecordId;
+    }
+    const recentRows=[
+      {id:'one-forty',name:'One Forty Music',year:2022,parentId:null,founders:'Adam King, Lee Walls',genres:['Trance','Hard Trance'],country:'United Kingdom',status:'active',notes:'2022 年 3 月由 Metta & Glyde 双人组 Adam King、Lee Walls 创立。One Forty Music 是厂牌体系名称，One Forty 与 One Forty Rise 为旗下 imprint。官网列有发行、团队和后续计划。资料依据用户粘贴清单；原文提及官方介绍但未附链接。'},
+      {id:'one-forty-imprint',name:'One Forty',year:2022,parentId:'one-forty',genres:['Trance','Hard Trance'],country:'United Kingdom',status:'active',notes:'One Forty Music 旗下 imprint，主打约 140 BPM Trance。'},
+      {id:'one-forty-rise',name:'One Forty Rise',year:2022,parentId:'one-forty',genres:['Trance','Uplifting Trance'],country:'United Kingdom',status:'active',notes:'One Forty Music 旗下 imprint。'},
+      {id:'cooperation-trance',name:'Cooperation Trance',year:2022,parentId:null,founders:'CO1N',genres:['Trance'],country:'China',status:'active',notes:'中国 Trance 厂牌，由制作人 CO1N 于 2022 年创立，Hazers 等成员参与运营。官网显示 2026 年仍有更新。'},
+      {id:'cooperation-pure',name:'Cooperation Pure',year:2022,parentId:'cooperation-trance',genres:['Trance'],country:'China',status:'active',notes:'Cooperation Trance 旗下厂牌。'},
+      {id:'eternal-starlight',name:'Eternal Starlight Recordings',year:2022,parentId:'cooperation-trance',genres:['Trance'],country:'China',status:'active',notes:'Cooperation Trance 旗下厂牌。'},
+      {id:'trance-is-the-life',name:'Trance Is The Life Recordings',year:2022,parentId:'cooperation-trance',genres:['Trance'],country:'China',status:'active',notes:'Cooperation Trance 旗下厂牌。'},
+      {id:'cospire',name:'COSPIRE',year:2026,parentId:'cooperation-trance',genres:['Trance'],country:'China',status:'active',notes:'Cooperation Trance 于 2026 年推出，面向新兴音乐人；LESSILESS、KARMI_ 等制作人参与。'},
+      {id:'artcore',name:'Artcore',year:2022,parentId:null,founders:'Indira Paganotto',genres:['Techno','Psy-Trance','Flamenco'],country:'Spain',status:'unknown',notes:'个人 imprint，融合 Techno、Psy-Trance 与 Flamenco，首发为创办人本人的 EP。未见外部母厂牌或子厂牌资料；近期是否持续作为独立厂牌发行，待核实。'},
+      {id:'cold-blue',name:'Cold Blue Records',year:2023,parentId:null,founders:'Cold Blue (Tobias Schuh)',genres:['Trance','Uplifting Trance'],country:'Germany',status:'unknown',notes:'Cold Blue 于 2023 年推出的个人厂牌，首发《Redemption》，定位旋律性 Uplifting Trance，也计划发行其他艺人作品；近期发行情况待核实。'},
+      {id:'bemind',name:'BEMIND Records',year:2023,parentId:null,founders:'DIM3NSION (Borja Iglesias)',genres:['Trance','Progressive Trance','Melodic Techno'],country:'Spain',status:'active',notes:'DIM3NSION 于 2023 年创立；官网仍介绍厂牌、创办人和音乐方向。'},
+      {id:'raw-sessions',name:'RAW Sessions Recordings',year:null,parentId:null,genres:['Tech Trance'],country:'Netherlands',status:'unknown',notes:'据 RAW RCRDS 厂牌说明，原为其 imprint；旧厂牌曾停摆约 15 年。成立年份待确认。'},
+      {id:'raw-rcrds',name:'RAW RCRDS',year:2023,parentId:'raw-sessions',founders:'Ronald van Gelderen',genres:['Tech Trance'],country:'Netherlands',status:'unknown',notes:'Ronald van Gelderen 于 2023 年重新启用；并非从零建立的新品牌。2023 年有发行记录，近期连续发行状况待确认。'},
+      {id:'parivara',name:'Parivara Records',year:2023,parentId:null,founders:'Malaskra, Seganka',genres:['Psy-Trance','Full-On','Hi-Tech','Downtempo'],country:'Germany',status:'active',notes:'由活动系列发展而来，首批发行始于 2023 年；2024 年 Fatal Morgana 与 Ikarus 加入团队。官网及平台可查到 2025–2026 年发行和活动。'},
+      {id:'solarya',name:'Solarya Music',year:2024,parentId:null,genres:['Uplifting Trance'],country:'Switzerland',status:'active',notes:'官网标注成立于 2024 年，专注扶持新晋 Trance 制作人；页面列有艺人、发行、活动及 Demo 入口。'},
+      {id:'think-trance',name:'Think Trance',year:null,parentId:null,genres:['Trance'],country:'Switzerland',status:'active',notes:'Think Trance 网络／平台；资料同时将其关联 Tuned:Flow。成立年份未提供。'},
+      {id:'tsoe',name:'TSOE Records (The Source Of Emotions)',year:2024,parentId:'think-trance',founders:'DJ Spaceman, Sunryz, DJ X-Tromic',genres:['Uplifting Trance','Tech Trance','Hard Trance'],country:'Switzerland',status:'active',notes:'Think Trance 网络下的子厂牌，也隶属 Tuned:Flow/Think Trance 平台。网站仍列出发行、艺人与活动。'},
+      {id:'luminara-labs',name:'Luminara Labs',year:2024,parentId:null,founders:'MoLunar, Prodelic, XaMaX',genres:['Psy-Trance','Twilight','Forest','Darkpsy'],country:'Switzerland',status:'active',notes:'厂牌与活动品牌，由三位瑞士音乐人创立，从苏黎世聚会和活动发展而来；官网更新至 2026 年。'},
+      {id:'excessus',name:'Excessus Records',year:2024,parentId:null,genres:['Psy-Trance','Tek'],country:'Switzerland',status:'unknown',notes:'2024 年 3 月启动，涵盖 Psy-Trance、Tek 及子风格，也涉及艺人预订和活动组织；近期发行频率待确认。'},
+      {id:'gimme-a-break',name:'Gimme A Break',year:null,parentId:null,genres:['Electronic'],country:'United Kingdom',status:'unknown',notes:'Aspect 的上级厂牌；成立年份未在用户粘贴资料中说明。'},
+      {id:'aspect',name:'Aspect',year:2024,parentId:'gimme-a-break',genres:['Electro','Trance','Techno','Progressive House'],country:'United Kingdom',status:'unknown',notes:'Gimme A Break 于 2024 年推出的跨风格子厂牌；可确认首作，后续持续运营情况待确认。'},
+      {id:'borderlands-music',name:'Borderlands Music',year:2025,parentId:null,founders:'Misja Helsloot, Michael de Kooker (Hel:sløwed)',genres:['Progressive','Melodic Electronic','Techno','Trance'],country:'Netherlands',status:'active',notes:'2025 年正式公布，以《Schmetterling》为首发；官网更新发行、演出和 Demo 信息。与 Hel:sløwed 项目有关。'},
+      {id:'spf-project',name:'SPF',year:null,parentId:null,founders:'TDJ',genres:['Electronic'],country:'Canada',status:'unknown',notes:'TDJ 的音乐／视觉项目，SPF INFINI 从该项目延伸；成立年份未提供。'},
+      {id:'spf-infini',name:'SPF INFINI',year:2025,parentId:'spf-project',founders:'TDJ',genres:['Trance','Euphoric Trance'],country:'Canada',status:'unknown',notes:'TDJ 于 2025 年正式推出的当代 Trance 厂牌；首发为 Zorza 策划的 22 曲混音与影像作品，后续运营情况待观察。'},
+      {id:'transtate',name:'Transtate Records',year:2025,parentId:null,genres:['Trance','Progressive Trance','Hard Trance'],country:'United Kingdom',status:'active',notes:'公开发行目录显示首批发行始于 2025 年，主要发行 Enigma State 等作品；Bandcamp 可查 2026 年发行。创办人和厂牌隶属关系未确认。'},
+      {id:'technostate',name:'Technostate',year:null,parentId:null,genres:['Electronic'],country:'Sweden',status:'active',notes:'Technostate 活动品牌；厂牌部门于 2025 年成立。'},
+      {id:'technostate-records',name:'Technostate Records',year:2025,parentId:'technostate',genres:['Techno','Progressive Trance','Melodic House','Psy','Industrial Bass'],country:'Sweden',status:'active',notes:'Technostate 活动品牌旗下跨风格厂牌部门，非纯 Trance 厂牌；官网仍在维护。'},
+      {id:'mutant-disco',name:'Mutant Disco Records',year:2025,parentId:null,founders:'Ace Ventura (Yoni Oshrat)',genres:['Psy-Trance','Electronic'],country:'Israel',status:'active',notes:'Ace Ventura 于 2025 年启动，主要发行 Psy-Trance，也收录创办人认可的其他音乐；Beatport 可查 2026 年发行。'},
+      {id:'omnix',name:'OMNIX',year:2025,parentId:null,founders:'Santiago Torelli (Astroz)',genres:['Psy-Trance','Electronic'],country:null,status:'active',notes:'Santiago Torelli 创立的多厂牌体系，体系于 2025 年形成。'},
+      {id:'psynova',name:'PsyNova Records',year:2025,parentId:'omnix',founders:'Santiago Torelli (Astroz)',genres:['Psy-Trance'],country:null,status:'active',notes:'OMNIX 旗下厂牌；前身为 Torelli Recordings，属于 2025 年体系中的品牌重整，不代表从零创立。'},
+      {id:'auroreum',name:'Auroreum Records',year:2025,parentId:'omnix',genres:['Melodic Techno'],country:null,status:'active',notes:'OMNIX 旗下 Melodic Techno 厂牌，与 Progressive/Melodic 场景可能交叉；并非以 Trance 为核心。'},
+      {id:'sonnux',name:'Sōnnux Music',year:2026,parentId:null,founders:'Driftmoon',genres:['Trance','Progressive','Hybrid Orchestral'],country:null,status:'active',notes:'Driftmoon 创立，以《High Wall》(SNX001) 开张。与 Black Hole Recordings 有发行合作关系；合作方不等同于母厂牌。2026 年已有首发及后续目录。'},
+      {id:'sonnux-deep',name:'Sōnnux Deep',year:2026,parentId:'sonnux',genres:['Progressive','Deep Trance'],status:'active',notes:'Sōnnux Music 旗下发行方向，偏慢速 Progressive/Deep 声音。'},
+      {id:'sonnux-opus',name:'Sōnnux Opus',year:2026,parentId:'sonnux',genres:['Orchestral','Hybrid'],status:'active',notes:'Sōnnux Music 旗下发行方向，面向管弦乐／Hybrid 作品。'},
+      {id:'trancecoda',name:'Trancecoda',year:null,parentId:null,genres:['Trance'],country:'United Kingdom',status:'active',notes:'活动品牌；其厂牌部门于 2026 年启动。'},
+      {id:'trancecoda-records',name:'Trancecoda Records',year:2026,parentId:'trancecoda',genres:['Trance'],country:'United Kingdom',status:'active',entity:'Fusion Music Group Ltd.',notes:'登记在 Fusion Music Group Ltd. 旗下；由 Black Hole Recordings 全球发行，发行方不等于母厂牌。官网提供 Demo 入口并处于运营初期。'},
+      {id:'aetherium-beats',name:'Aetherium Beats',year:null,parentId:null,genres:['Electronic'],status:'unknown',notes:'Amulet Records 的上级厂牌；成立年份及运营细节未在粘贴资料中说明。'},
+      {id:'amulet-records',name:'Amulet Records',year:2026,parentId:'aetherium-beats',genres:['Celtic Trance'],status:'unknown',notes:'Aetherium Beats 旗下 Celtic Trance 子厂牌；首张 EP 为 Morpho OG 的《Coillte Rúnda》。个人创办人未公开；后续运营待观察。'},
+      {id:'blooom',name:'blooom⋮',year:2026,parentId:null,founders:'BLR, Amber Revival, Soave Records',genres:['Melodic Electronic','Dance','Trance-adjacent'],status:'unknown',notes:'2026 年 6 月由 BLR、Amber Revival 与 Soave Records 联合推出，以《breathless》启动。属于联合推出／合作，不据此认定为 Soave 子厂牌；非纯 Trance。'},
+      {id:'psytrance-division',name:'Psytrance Division',year:2026,parentId:null,founders:'District Solaris',genres:['Psy-Trance'],status:'active',notes:'数据库显示首批发行始于 2026 年 3 月；接受 Demo，2026 年仍有发行记录。'},
+      {id:'rexon-music',name:'Rexon Music',year:2026,parentId:null,genres:['Techno','House','Trance','Big Room'],country:'Finland',status:'active',notes:'芬兰电子音乐厂牌，目标扶持本地及国际音乐人。官网称获 Resonation 与 Luxonia 支持；支持关系不等同于母子厂牌关系。可查到 2026 年 10 月发行。'},
+      {id:'hor',name:'HÖR',year:null,parentId:null,genres:['Electronic'],country:'Germany',status:'active',notes:'柏林音乐平台；HÖRCORE 为其于 2026 年推出的厂牌与经纪业务。'},
+      {id:'horcore',name:'HÖRCORE',year:2026,parentId:'hor',genres:['Techno','House','Trance','Hard Dance','Drum & Bass'],country:'Germany',status:'active',notes:'HÖR 于 2026 年推出的跨风格厂牌与经纪业务；首批单曲于 2026 年 9 月推出，之后公布合辑计划，处于早期运营阶段。'}
+    ];
+    const recentIds=new Map();
+    for(const item of recentRows){
+      const existing=seed.find(x=>normalizeName(x.name)===normalizeName(item.name));
+      const recordId=existing?.id||(seed.some(x=>x.id===item.id)?`recent-${item.id}`:item.id);
+      recentIds.set(item.id,recordId);
+      const notes=`2022–2026 清单补录；${item.notes||''} 粘贴文本中标注的来源标题未附可点击网址，待补录链接。`;
+      if(existing){
+        Object.assign(existing,{year:item.year??existing.year,parentId:item.parentId?recentIds.get(item.parentId)||item.parentId:null,founders:item.founders??existing.founders,genres:[...new Set([...(existing.genres||[]),...(item.genres||[])])],country:item.country??existing.country,status:item.status||existing.status,entity:item.entity??existing.entity,notes:[existing.notes,notes].filter(Boolean).join(' '),source:existing.source||labelSearch(item.name)});
+      }else{
+        seed.push({...item,id:recordId,parentId:null,genres:item.genres||[],founders:item.founders||'',status:item.status||'unknown',notes,source:labelSearch(item.name)});
+      }
+    }
+    for(const item of recentRows){const child=seed.find(x=>x.id===recentIds.get(item.id));const parentId=recentIds.get(item.parentId)||item.parentId;if(child&&item.parentId&&seed.some(x=>x.id===parentId))child.parentId=parentId;}
+    const canonicalTree=[
+      {id:'blackhole',name:'Black Hole Recordings',oldNames:['Black Hole Recordings B.V.'],parentId:null,children:[
+        {name:'In Trance We Trust'},{name:'Magik Muzik'},{name:'Avanti'},{name:'Ace of Clubs'},{name:'Gameroom'},{name:'Kryteria'},{name:'Muse Music'},{name:'Muse Music Euphoria'},{name:'Dinamode'},{name:'Elpida Music'},{name:'Force Of Habit'},{name:'Regenerate Records'},
+        {name:'AVA Recordings',children:[{name:'AVA White'},{name:'AVA Deep'},{name:'AVA Chill'}]},
+        {name:'Coldharbour Recordings',children:[{id:'coldharbour-black',name:'Coldharbour Recordings Black',oldNames:['Coldharbour Black']}]},
+        {name:'Pure Trance',children:[{id:'pure-trance-neon',name:'Pure Trance Neon',oldNames:['Pure Trance NEON']},{name:'Pure Progressive'},{name:'Pure Breaks'}]},
+        {name:'Magic Island Records',children:[{name:'Magic Island Deep'},{name:'Magic Island Elevate'}]},
+        {name:'Outburst Records',children:[{name:'Outburst Twilight'}]},
+        {name:'Subculture'},{name:'Afterdark'},{name:'Zoomer Records'},{name:'Electronic Architecture'},{name:'HTE Recordings'},
+        {name:'OHM Music',children:[{name:'OHM Deep State'}]},
+        {name:'Planet Love'},{name:"Scorchin' Progressive"},{name:'Techburst Records'},{name:'Victims Helpline'},{name:'VII'},
+        {id:'wake-your-mind',name:'Wake Your Mind',oldNames:['Wake Your Mind Records']},{name:'Neo Tokyo Records'},{name:'Ginchiest Records'},{name:'Afterhours Sleaze'},{id:'trancecoda-records',name:'Trancecoda Records'}
+      ]},
+      {id:'armada',name:'Armada Music',oldNames:['Armada Music B.V.'],parentId:null,children:[
+        {name:'Armada Captivating'},{name:'Armada Chill'},{id:'electronic-elements',name:'Armada Electronic Elements',oldNames:['Electronic Elements']},{name:'Armada Subjekt'},{name:'Armind'},{name:'A State of Trance'},{name:'Who’s Afraid Of 138?!'},{name:'DAYS like NIGHTS'},{name:'Delecta Records'},{name:'SONO Music'},{name:'King Street Sounds'}
+      ]},
+      {id:'enhanced',name:'Enhanced Music',oldNames:['Enhanced Music Limited'],parentId:null,children:[{name:'Enhanced Recordings'},{name:'Enhanced Progressive'},{name:'Colorize'},{name:'Enhanced Chill'},{name:'Shapes of Solitude'}]},
+      {id:'involved',name:'Anjuna / Involved Productions',oldNames:['Involved Productions'],parentId:null,children:[{name:'Anjunabeats'},{name:'Anjunadeep'},{name:'Anjunachill'}]},
+      {id:'interplay-label-group',name:'Interplay Label Group',parentId:null,children:[{name:'Interplay Records'},{name:'Interplay Flow'},{name:'Interplay Global'},{name:'Interplay Unity'},{name:'FLAVA'}]},
+      {id:'two-rock-recordings',name:'2Rock Recordings',parentId:null,children:[{name:'2Rock B Side'},{name:'2Rock Uplifting'},{name:'2Rock Electronic'},{name:'2Rock Techno'}]},
+      {id:'redux',name:'Redux Recordings',parentId:null,children:[{name:'Redux Red'},{name:'Redux Digital'},{name:'Redux 138'},{name:'Redux Magic'},{name:'Condura Recordings'},{name:'Nexgen Sounds Records'},{name:'Connective Sounds'},{name:'Balearic Sun Records'},{name:'Deep Forest Recordings'},{name:'Destination Sunshine'}]}
+    ];
+    const canonicalNodes=[];
+    function collectCanonical(node,parentId){
+      const existing=(node.id&&seed.find(x=>x.id===node.id))||seed.find(x=>[node.name,...(node.oldNames||[])].some(n=>normalizeName(x.name)===normalizeName(n)));
+      const record=existing||{id:node.id||`tree-${normalizeName(node.name)}`,name:node.name,year:null,parentId:null,founders:'',genres:['Trance'],status:'unknown',notes:'按用户指定的厂牌树补录；成立年份、状态及 Discogs 对应条目待逐条核实。',source:labelSearch(node.name)};
+      if(!existing)seed.push(record);
+      if(record.name!==node.name){record.notes=[record.notes,`原目录名称：${record.name}。`].filter(Boolean).join(' ');record.name=node.name;}
+      record.parentId=parentId;
+      record.notes=[record.notes,'用户指定厂牌树归类。'].filter(Boolean).join(' ');
+      canonicalNodes.push({id:record.id,name:node.name,parentId,oldNames:node.oldNames||[]});
+      for(const child of node.children||[])collectCanonical(child,record.id);
+    }
+    for(const node of canonicalTree)collectCanonical(node,node.parentId);
+    const STORE='trance-label-atlas-v1';let records=load();let selectedId='armada';let expanded=new Set();let searchText='',genreValue='',statusValue='';
+    const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function load(){try{const raw=localStorage.getItem(STORE);if(!raw)return seed.slice();const saved=JSON.parse(raw);if(!Array.isArray(saved))return seed.slice();const knownIds=new Set(saved.map(x=>x.id));const knownNames=new Set(saved.map(x=>normalizeName(x.name)));const references=new Map(seed.filter(x=>x.notes?.includes('用户参考截图补录')||x.notes?.includes('2022–2026 清单补录')).map(x=>[normalizeName(x.name),x]));const legacyNames=new Map(canonicalNodes.flatMap(n=>n.oldNames.map(old=>[normalizeName(old),n])));let changed=false;const enriched=saved.map(x=>{const canonical=canonicalNodes.find(n=>n.id===x.id)||legacyNames.get(normalizeName(x.name));if(canonical){if(x.name!==canonical.name){x.name=canonical.name;changed=true}if(x.parentId!==canonical.parentId){x.parentId=canonical.parentId;changed=true}}const ref=references.get(normalizeName(x.name));if(!ref)return x;const genres=[...new Set([...(x.genres||[]),...(ref.genres||[])])];if(genres.length!==(x.genres||[]).length){x.genres=genres;changed=true}if(ref.year&&x.year!==ref.year){x.year=ref.year;changed=true}if(x.parentId!==ref.parentId){x.parentId=ref.parentId;changed=true}if(ref.founders&&x.founders!==ref.founders){x.founders=ref.founders;changed=true}if(ref.country&&x.country!==ref.country){x.country=ref.country;changed=true}if(ref.entity&&x.entity!==ref.entity){x.entity=ref.entity;changed=true}if(ref.source&&!x.source){x.source=ref.source;changed=true}const marker=ref.notes?.includes('2022–2026 清单补录')?'2022–2026 清单补录':'用户参考截图补录';if(marker==='2022–2026 清单补录'&&x.status!==ref.status){x.status=ref.status;changed=true}if(ref.notes&&!x.notes?.includes(marker)){x.notes=[x.notes,ref.notes].filter(Boolean).join(' ');changed=true}if(/划线|\[\?\]/.test(ref.notes||'')&&x.status!=='unknown'){x.status='unknown';changed=true}return x});for(const x of enriched){const canonical=canonicalNodes.find(n=>n.id===x.id)||legacyNames.get(normalizeName(x.name));if(canonical){if(x.name!==canonical.name){x.name=canonical.name;changed=true}if(x.parentId!==canonical.parentId){x.parentId=canonical.parentId;changed=true}}}const additions=seed.filter(x=>!knownIds.has(x.id)&&!knownNames.has(normalizeName(x.name)));const merged=[...enriched,...additions];if(changed||additions.length)localStorage.setItem(STORE,JSON.stringify(merged));return merged}catch{return seed.slice()}}
+    function persist(){localStorage.setItem(STORE,JSON.stringify(records))}
+    function sort(a,b){return (Number(a.year)||9999)-(Number(b.year)||9999)||a.name.localeCompare(b.name,'en',{sensitivity:'base'})}
+    function childrenOf(id){return records.filter(x=>x.parentId===id).sort(sort)}
+    function roots(){return records.filter(x=>!x.parentId||!records.some(p=>p.id===x.parentId)).sort(sort)}
+    function descendants(id){const out=[];for(const c of childrenOf(id)){out.push(c,...descendants(c.id))}return out}
+    function genres(){return [...new Set(records.flatMap(x=>x.genres||[]))].sort((a,b)=>a.localeCompare(b,'en'))}
+    function statusLabel(s){return s==='active'?'运营中':s==='inactive'?'已停止':'待确认'}
+    function matches(x){const q=searchText.toLowerCase();const hay=[x.name,x.founders,x.entity,x.country,x.notes,...(x.genres||[])].join(' ').toLowerCase();return (!q||hay.includes(q))&&(!genreValue||(x.genres||[]).includes(genreValue))&&(!statusValue||x.status===statusValue)}
+    function visibleBranch(x){return matches(x)||descendants(x.id).some(matches)}
+    function renderFilters(){const el=$('genreFilter'),old=genreValue;el.innerHTML='<option value="">全部风格</option>'+genres().map(g=>`<option value="${esc(g)}">${esc(g)}</option>`).join('');el.value=old}
+    function row(x,depth=0){const kids=childrenOf(x.id),show=visibleBranch(x),forcedOpen=(!!searchText||!!genreValue||!!statusValue)&&kids.some(visibleBranch),open=expanded.has(x.id)||forcedOpen;if(!show)return '';return `<div class="tree-row ${depth?'child':''} ${selectedId===x.id?'selected':''}" role="treeitem" aria-level="${depth+1}" aria-expanded="${kids.length?open:'false'}" data-id="${esc(x.id)}" style="--depth:${depth}"><button class="twisty ${kids.length?'':'empty'}" data-toggle="${esc(x.id)}" aria-label="${open?'折叠':'展开'}">${kids.length?(open?'▾':'▸'):''}</button><span class="year">${x.year?`[${esc(x.year)}]`:'[—]'}</span><span class="row-name" data-select="${esc(x.id)}">${esc(x.name)}</span><span class="row-meta">${esc(x.founders||'')}</span><div class="row-tail">${x.genres?.[0]?`<span class="genre-pill">${esc(x.genres[0])}</span>`:''}<span class="status-pill ${esc(x.status||'unknown')}">${statusLabel(x.status)}</span>${kids.length?`<span class="count-pill">${kids.length}</span>`:''}</div></div>${kids.length&&open?kids.map(k=>row(k,depth+1)).join(''):''}`}
+    function renderTree(){const tree=$('tree');tree.innerHTML=roots().map(x=>row(x)).join('');let count=0;for(const x of records)if(matches(x))count++;$('resultCount').textContent=`${count} / ${records.length} 条记录`;tree.querySelectorAll('[data-select]').forEach(el=>el.onclick=()=>select(el.dataset.select));tree.querySelectorAll('[data-toggle]').forEach(el=>el.onclick=e=>{e.stopPropagation();const id=el.dataset.toggle;expanded.has(id)?expanded.delete(id):expanded.add(id);renderTree()});if(!tree.innerHTML)tree.innerHTML='<div class="empty-state">没有符合条件的厂牌。试试清除筛选，或新增一条记录。</div>'}
+    function renderStats(){const active=records.filter(x=>x.status==='active').length;let max=1;function walk(x,d){max=Math.max(max,d);childrenOf(x.id).forEach(k=>walk(k,d+1))}roots().forEach(x=>walk(x,1));const yrs=records.map(x=>Number(x.year)).filter(Boolean);$('statLabels').innerHTML=`${records.length}<small>家</small>`;$('statDepth').innerHTML=`${max}<small>层</small>`;$('statOldest').textContent=yrs.length?Math.min(...yrs):'—';$('statActive').innerHTML=`${active}<small>家</small>`}
+    function renderDetail(){const x=records.find(r=>r.id===selectedId);const d=$('detail');if(!x){d.innerHTML='<div class="detail-top"><div class="detail-kicker">LABEL PROFILE</div><h2>选择一个厂牌</h2><div class="detail-sub">点击左侧名称，查看它的档案与上下级关系。</div></div><div class="detail-body"><div class="detail-section"><h3>登记字段</h3><p>年份 · 创办人 · 音乐风格 · 运营状态 · 公司实体 · 沿革与来源</p></div></div>';return}const parent=records.find(r=>r.id===x.parentId);const kids=childrenOf(x.id);const year=x.year||'年份待确认';d.innerHTML=`<div class="detail-top"><div class="detail-kicker">${esc(year)} · LABEL PROFILE</div><h2>${esc(x.name)}</h2><div class="detail-sub">${parent?`隶属 ${esc(parent.name)}`:'顶层厂牌'}${x.entity?` · ${esc(x.entity)}`:''}</div></div><div class="detail-body"><div class="detail-tags">${(x.genres||[]).map(g=>`<span class="genre-pill">${esc(g)}</span>`).join('')}<span class="status-pill ${esc(x.status||'unknown')}">${statusLabel(x.status)}</span></div><div class="detail-grid"><div class="detail-field"><label>成立年份</label><div>${esc(x.year||'待确认')}</div></div><div class="detail-field"><label>国家 / 地区</label><div>${esc(x.country||'未记录')}</div></div><div class="detail-field"><label>创办人 / 关键人员</label><div>${esc(x.founders||'未记录')}</div></div><div class="detail-field"><label>公司 / 实体</label><div>${esc(x.entity||'未记录')}</div></div></div>${kids.length?`<div class="detail-section"><h3>子厂牌 · ${kids.length}</h3><p>${kids.map(k=>esc(k.name)).join(' · ')}</p></div>`:''}${x.notes?`<div class="detail-section"><h3>沿革与备注</h3><p>${esc(x.notes)}</p></div>`:''}${x.source?`<div class="detail-section"><h3>参考来源</h3><p><a href="${esc(x.source)}" target="_blank" rel="noreferrer" style="color:var(--mint)">打开来源 ↗</a></p></div>`:''}</div><div class="detail-actions"><button class="outline-btn" id="editSelected">编辑档案</button><button class="quiet-btn" id="deleteSelected">删除</button></div>`;d.querySelector('#editSelected').onclick=()=>openForm(x);d.querySelector('#deleteSelected').onclick=()=>removeLabel(x)}
+    function select(id){selectedId=id;renderTree();renderDetail();if(innerWidth<=760){$('detail').classList.add('mobile-open');$('mobileShade').classList.add('show')}}
+    function render(){renderFilters();renderTree();renderDetail();renderStats();fillParents()}
+    function fillParents(current=''){const s=$('parent');if(!s)return;const old=s.value;s.innerHTML='<option value="">顶层厂牌</option>'+records.filter(x=>x.id!==current&&!descendants(current).some(d=>d.id===x.id)).sort(sort).map(x=>`<option value="${esc(x.id)}">${esc(x.year||'—')} · ${esc(x.name)}</option>`).join('');if([...s.options].some(o=>o.value===old))s.value=old}
+    function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2300)}
+    function closeForm(){$('modalBackdrop').classList.remove('open');$('formError').textContent=''}
+    function openForm(edit=null){const f=$('labelForm');f.reset();$('formError').textContent='';f.dataset.editId=edit?.id||'';$('formTitle').textContent=edit?'编辑厂牌档案':'登记新厂牌';fillParents(edit?.id||'');if(edit){for(const key of ['name','year','founders','entity','country','notes','source'])f.elements[key].value=edit[key]??'';f.elements.genres.value=(edit.genres||[]).join(', ');f.elements.status.value=edit.status||'unknown';f.elements.parent.value=edit.parentId||''} $('modalBackdrop').classList.add('open');setTimeout(()=>$('name').focus(),80)}
+    function removeLabel(x){if(!confirm(`删除“${x.name}”及其所有子厂牌？`))return;const ids=[x.id,...descendants(x.id).map(d=>d.id)];records=records.filter(r=>!ids.includes(r.id));selectedId=null;persist();render();showToast(`已删除 ${ids.length} 条记录`)}
+    $('addBtn').onclick=()=>openForm();$('closeModal').onclick=closeForm;$('modalBackdrop').onclick=e=>{if(e.target===$('modalBackdrop'))closeForm()};document.onkeydown=e=>{if(e.key==='Escape'){closeForm();$('detail').classList.remove('mobile-open');$('mobileShade').classList.remove('show')}};$('mobileShade').onclick=()=>{$('detail').classList.remove('mobile-open');$('mobileShade').classList.remove('show')};
+    $('labelForm').onsubmit=e=>{e.preventDefault();const f=e.currentTarget;const fd=new FormData(f);const editId=f.dataset.editId;const name=String(fd.get('name')).trim();if(!name){$('formError').textContent='请填写厂牌名称。';return}const parentId=String(fd.get('parent')||'')||null;if(parentId===editId){$('formError').textContent='厂牌不能成为自己的上级。';return}const id=editId||`label-${Date.now()}-${Math.random().toString(36).slice(2,6)}`;const item={id,name,year:Number(fd.get('year'))||null,parentId,founders:String(fd.get('founders')).trim(),genres:String(fd.get('genres')).split(/[,，、]/).map(v=>v.trim()).filter(Boolean),status:String(fd.get('status')||'unknown'),entity:String(fd.get('entity')).trim(),country:String(fd.get('country')).trim(),notes:String(fd.get('notes')).trim(),source:String(fd.get('source')).trim()};if(editId){const prior=records.findIndex(r=>r.id===editId);records[prior]=item}else records.push(item);persist();selectedId=id;if(parentId)expanded.add(parentId);closeForm();render();showToast(editId?'档案已更新':'厂牌已登记')};
+    $('search').oninput=e=>{searchText=e.target.value.trim();renderTree()};$('genreFilter').onchange=e=>{genreValue=e.target.value;renderTree()};$('statusFilter').onchange=e=>{statusValue=e.target.value;renderTree()};$('clearFilters').onclick=()=>{$('search').value='';$('genreFilter').value='';$('statusFilter').value='';searchText=genreValue=statusValue='';renderTree()};$('collapseAll').onclick=()=>{expanded.clear();renderTree()};$('expandAll').onclick=()=>{records.forEach(x=>{if(childrenOf(x.id).length)expanded.add(x.id)});renderTree()};
+    $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(records,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='trance-label-atlas.json';a.click();URL.revokeObjectURL(url);showToast('JSON 数据已导出')};$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());if(!Array.isArray(parsed)||parsed.some(x=>!x.name||!x.id))throw Error('格式不正确');records=parsed;persist();selectedId=null;expanded.clear();render();showToast(`已导入 ${records.length} 条记录`)}catch(err){alert('导入失败：请使用本网站导出的 JSON 文件。')}e.target.value=''};
+    render();['eyeq','recoverworld','blackhole','armada','enhanced'].forEach(id=>expanded.add(id));renderTree();
+  })();
+  </script>
+</body>
+</html>
+
